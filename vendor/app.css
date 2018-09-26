@@ -1,0 +1,123 @@
+.softphone {
+    width: 200;
+    height: 450px;
+    position: fixed;
+    top: 70px;
+    right: 10px;
+  }
+  
+  /* body > div > iframe {
+    width: inherit;
+    height: inherit;
+    border: none;
+  }
+  
+  body {
+    padding-top: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  }
+  
+  a {
+    color: #00B7FF;
+  }
+  
+  table {
+    border-collapse: collapse;
+  }
+  
+  table, th, td {
+    border: 1px solid #9aa;
+    font-size: 12px;
+  }
+  
+  th, td {
+    padding: 5px;
+    text-align: center;
+  }
+  
+  input {
+    padding: 5px;
+  }
+  
+  html,body,h1,h2,h3,h4,h5,h6 {
+    font-family: "Roboto", sans-serif;
+  }
+  
+  .w3-sidebar {
+    z-index: 3;
+    width: 250px;
+    top: 70px;
+    bottom: 0;
+    height: inherit;
+  }
+  
+  #myBody {
+    padding: 10px;
+    padding-bottom: 145px;
+    height: 100%;
+  }
+  
+  #myFooter{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
+  }
+  
+  .tooltip {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  td.leftSide {
+    text-align: left;
+  }
+  
+  td.rightSide {
+    text-align: right;
+  }
+  
+  .block label { 
+    display: inline-block; 
+    width: 140px; 
+    text-align: right; 
+  }
+  
+  .block input { 
+    display: inline-block; 
+    width: 180px; 
+    text-align: left; 
+  } */
