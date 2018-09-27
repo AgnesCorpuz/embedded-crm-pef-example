@@ -18,7 +18,7 @@ window.Framework = {
             CallLog: "https://help.mypurecloud.com/articles/about-call-logs/", 
             Settings: "https://help.mypurecloud.com/articles/about-settings/" 
         },
-        customInteractionAttributes: ['PT_URLPop', 'PT_SearchValue', 'PT_TransferContext'],
+        customInteractionAttributes: ['PEF_URLPop', 'PEF_SearchValue', 'PEF_TransferContext'],
         getUserLanguage: function(callback) {
             callback("en-US");
         }
