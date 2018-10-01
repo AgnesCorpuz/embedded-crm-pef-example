@@ -25,17 +25,28 @@ window.Framework = {
     },
 
     initialSetup: function () {
+        window.PureCloud.subscribe([
+            {
+                type: 'UserAction', 
+                callback: function (category, data) {
+                    window.parent.postMessage(JSON.stringify({type:"userActionSubscription", data:{category:category, data:data}}) , "*");
+                }  
+            }
+        ]);
+
         window.addEventListener("message", function(event) {
             var message = JSON.parse(event.data);
             if(message){
                 if(message.type == "clickToDial"){
                     window.PureCloud.clickToDial(message.data);
-                }else if(message.type == "addTransferContext"){
+                } else if(message.type == "addTransferContext"){
                     window.PureCloud.addTransferContext(message.data);
-                }else if(message.type == "sendContactSearch"){
+                } else if(message.type == "sendContactSearch"){
                     if(contactSearchCallback) {
                         contactSearchCallback(message.data);
                     }
+                } else if(message.type == "updateUserStatus"){
+                    window.PureCloud.User.updateStatus(message.data);
                 }
             }
         });

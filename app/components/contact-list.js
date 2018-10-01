@@ -4,6 +4,7 @@ export default Component.extend({
     didInsertElement() {
         window.addEventListener("message", function(event) {
             var message = JSON.parse(event.data);
+            
             if(message){
                 if(message.type == "screenPop"){
                     // document.getElementById("screenPopPayload").value = event.data;
@@ -15,10 +16,26 @@ export default Component.extend({
 
                     document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
                         type: 'addTransferContext',
-                        data: {"name": "Case: 1234 - Broken Phone","attributes": {"PEF_TransferContext": "1234"}}
+                        data: {"name": "Case: 1234 - Broken Phone","attributes": {"PEF_TransferContext": "Sample Transfer Context 1234"}}
                     }), "*");
+                } else if(message.type == "userActionSubscription"){
+                    if(message.data.category == "status") {
+                        this.alert("User Status: " + message.data.data.status);
+                    }
                 }
             }
         });
-      }
+      },
+    selectedStatus: null,
+    actions: {
+        setStatus: function(selected) {
+            this.set("selectedStatus", selected);
+        },
+        submit: function(){
+            document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
+                type: 'updateUserStatus',
+                data: { id: this.get('selectedStatus') }
+            }), "*");
+        }
+    }
 });
