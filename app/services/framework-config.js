@@ -9,17 +9,32 @@ export default Service.extend({
     init(){
         this._super(...arguments);
         
-        // Load values from localStorage
-        this.set('embedWebRTCByDefault', (localStorage.getItem("embedWebRTCByDefault") === 'true'));
-        this.set('enableCallLogs', (localStorage.getItem("enableCallLogs") === 'true'));
-        this.set('dedicatedLoginWindow',(localStorage.getItem("dedicatedLoginWindow") === 'true'));
-        this.set('userLanguage', localStorage.getItem("userLanguage"));
+        // Set default values
+        this.set('embedWebRTCByDefault', true);
+        this.set('enableCallLogs', true);
+        this.set('dedicatedLoginWindow', true);
+        this.set('userLanguage', "en-US");
+        this.set('theme', {
+            'primary': '#666',
+            'text': '#fff'
+        });
 
-        // Default Values
-        if(this.embedWebRTCByDefault === null) this.set('embedWebRTCByDefault', true);
-        if(this.enableCallLogs === null) this.set('enableCallLogs', true);
-        if(this.dedicatedLoginWindow === null) this.set('dedicatedLoginWindow', true);
-        if(this.userLanguage === null) this.set('userLanguage', 'en-US');
+
+        // Check if there are saved settings in the localstorage
+        if(localStorage.getItem("embedWebRTCByDefault") !== null)
+            this.set('embedWebRTCByDefault', (localStorage.getItem("embedWebRTCByDefault") === 'true'));
+
+        if(localStorage.getItem("enableCallLogs") !== null)
+            this.set('enableCallLogs', (localStorage.getItem("enableCallLogs") === 'true'));
+
+        if(localStorage.getItem("dedicatedLoginWindow") !== null)
+            this.set('dedicatedLoginWindow',(localStorage.getItem("dedicatedLoginWindow") === 'true'));
+
+        if(localStorage.getItem("userLanguage") !== null)
+            this.set('userLanguage', localStorage.getItem("userLanguage"));
+
+        if(localStorage.getItem("theme") !== null) 
+            this.set('theme', JSON.parse(localStorage.getItem("theme")));
     },
 
     saveConfiguration(){
@@ -27,5 +42,6 @@ export default Service.extend({
         localStorage.setItem('enableCallLogs', this.enableCallLogs);
         localStorage.setItem('dedicatedLoginWindow', this.dedicatedLoginWindow);
         localStorage.setItem('userLanguage', this.userLanguage);
+        localStorage.setItem('theme', JSON.stringify(this.theme));
     }
 });

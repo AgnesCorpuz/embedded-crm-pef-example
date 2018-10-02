@@ -32,7 +32,24 @@ window.Framework = {
             })(),
 
             enableTransferContext: true,
-            searchTargets: ['people', 'queues', 'frameworkcontacts']
+            searchTargets: ['people', 'queues', 'frameworkcontacts'],
+
+            theme: {
+                primary: (() => {
+                    let primarycolor = new URLSearchParams(window.location.search).get('primarycolor');
+    
+                    if(!primarycolor) return '#666';
+    
+                    return decodeURI(primarycolor);
+                })(),
+                text: (() => {
+                    let textcolor = new URLSearchParams(window.location.search).get('textcolor');
+    
+                    if(!textcolor) return '#fff';
+    
+                    return decodeURI(textcolor);
+                })()
+            }
         },
         helpLinks: {
             InteractionList: "https://help.mypurecloud.com/articles/about-interaction-list/",
@@ -51,12 +68,21 @@ window.Framework = {
         }
     },
 
+    crmDomain: null,
     initialSetup: function () {
+        console.log("=================  PURECLOUD EMBEDDABLE SETUP ============");
+        crmDomain = new URLSearchParams(window.location.search).get('crm_domain');
+        console.log("crm_domain : ", decodeURI(crmDomain));
+        if (!crmDomain) {
+        console.warn("========== crm_domain parameter is null =================");
+            return;
+        }
+
         window.PureCloud.subscribe([
             {
                 type: 'UserAction', 
                 callback: function (category, data) {
-                    window.parent.postMessage(JSON.stringify({type:"userActionSubscription", data:{category:category, data:data}}) , "*");
+                    window.parent.postMessage(JSON.stringify({type:"userActionSubscription", data:{category:category, data:data}}), this.crmDomain);
                 }  
             }
         ]);
@@ -79,7 +105,7 @@ window.Framework = {
         });
     },
     screenPop: function (searchString, interaction) {
-        window.parent.postMessage(JSON.stringify({type:"screenPop", data:{searchString:searchString, interactionId:interaction}}) , "*");
+        window.parent.postMessage(JSON.stringify({type:"screenPop", data:{searchString:searchString, interactionId:interaction}}) , this.crmDomain);
     },
     processCallLog: function (callLog, interaction, eventName, onSuccess, onFailure) {
         
@@ -89,6 +115,6 @@ window.Framework = {
     },
     contactSearch: function(searchString, onSuccess, onFailure) {
         contactSearchCallback = onSuccess;
-        window.parent.postMessage(JSON.stringify({type:"contactSearch" , data:{searchString:searchString}}) , "*");
+        window.parent.postMessage(JSON.stringify({type:"contactSearch" , data:{searchString:searchString}}) , this.crmDomain);
     }
 };

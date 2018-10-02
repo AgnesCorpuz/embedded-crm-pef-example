@@ -62,18 +62,66 @@ export default Component.extend({
             "code": "zh-TW"
             }
         ];
+
+        this.themes = [
+            {
+                "name": "PureCloud Blue",
+                "primary": "#41A7CA",
+                "text": "#fff"
+            },
+            {
+                "name": "Grapes",
+                "primary": "#102E4A",
+                "text": "#CFBCFF"
+            },
+            {
+                "name": "Ancient Style",
+                "primary": "#691e06",
+                "text": "#fbba72"
+            },
+            {
+                "name": "Monochrome (Light)",
+                "primary": "#fff",
+                "text": "#000"
+            },
+            {
+                "name": "Monochrome (Dark)",
+                "primary": "#000",
+                "text": "#fff"
+            },
+            {
+                "name": "I Hate My Eyes",
+                "primary": "#FF80FF",
+                "text":  "#00ff00"
+            },
+            {
+                "name": "Something Sweet",
+                "primary": "#912F56",
+                "text":  "#EAF2EF"
+            },
+            {
+                "name": "Doobie Dap",
+                "primary": "#333",
+                "text": "#FF9F6F"
+            }
+        ];
     },
 
     frameworkConfig: service('framework-config'),
 
     actions: {
         saveConfig(){
-            
             this.frameworkConfig.saveConfiguration();
             window.location.reload(true);
         },
         setLanguage: function(lang){
             this.set('frameworkConfig.userLanguage', lang);
+        },
+        setTheme: function(themeName){
+            let themeInfo = this.themes.filter((t) => t.name === themeName)[0];
+
+            this.set('frameworkConfig.theme.primary', themeInfo.primary);
+            this.set('frameworkConfig.theme.text', themeInfo.text);
         }
     }
 });
