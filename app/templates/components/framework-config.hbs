@@ -1,0 +1,27 @@
+<div id="myBody">
+  <link rel="stylesheet" href="/styles/app.css" />
+  <div class="w3-row w3-padding-16">
+    <div class="w3-twothird w3-container">
+      <h1 class="w3-text-deep-orange">Configuration</h1>
+        <div>Embed WebRTC By Default
+            {{input type='checkbox' checked=frameworkConfig.embedWebRTCByDefault}}
+        </div>
+        <div>Dedicated Login Window
+            {{input type='checkbox' checked=frameworkConfig.dedicatedLoginWindow}}
+        </div>
+        <div>Enable Call Logs
+            {{input type='checkbox' checked=frameworkConfig.enableCallLogs}}
+        </div>
+        <div>
+            Language: 
+            <select onchange={{action 'setLanguage' value='target.value'}} name="userLanguage" id="userLanguage">
+                <option hidden value="">{{frameworkConfig.userLanguage}}</option>
+                {{#each languages as |language|}}
+                    <option value={{language.code}}>{{language.language}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <button {{action "saveConfig"}}>Save Settings</button>
+    </div>
+  </div>
+</div>

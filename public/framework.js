@@ -7,9 +7,30 @@ window.Framework = {
             'mypurecloud.com': 'bd13529b-865c-4ffd-8f07-e055a9eb5a76'
         },        
         settings: {
-            embedWebRTCByDefault: true,
-            enableCallLogs: true,
-            dedicatedLoginWindow: true,
+            embedWebRTCByDefault: (() => {
+                let embedWebRTCByDefault = new URLSearchParams(window.location.search).get('embedWebRTCByDefault');
+
+                if(!embedWebRTCByDefault) return true;
+
+                return embedWebRTCByDefault;
+            })(),
+
+            enableCallLogs: (() => {
+                let enableCallLogs = new URLSearchParams(window.location.search).get('enableCallLogs');
+
+                if(!enableCallLogs) return true;
+
+                return enableCallLogs;
+            })(),
+
+            dedicatedLoginWindow: (() => {
+                let dedicatedLoginWindow = new URLSearchParams(window.location.search).get('dedicatedLoginWindow');
+
+                if(!dedicatedLoginWindow) return true;
+
+                return dedicatedLoginWindow;
+            })(),
+
             enableTransferContext: true,
             searchTargets: ['people', 'queues', 'frameworkcontacts']
         },
@@ -20,7 +41,13 @@ window.Framework = {
         },
         customInteractionAttributes: ['PEF_URLPop', 'PEF_SearchValue', 'PEF_TransferContext'],
         getUserLanguage: function(callback) {
-            callback("en-US");
+            let lang = new URLSearchParams(window.location.search).get('userLanguage');
+            if(!lang){
+                // Default to English
+                callback("en-US");
+            }else{
+                callback(lang);
+            }
         }
     },
 

@@ -8,7 +8,7 @@
     </head>
     <body>
         <div class="softphone">
-            <iframe id="softphone" allow="camera *; microphone *" src="https://apps.mypurecloud.com/crm/index.html?crm=framework-local-secure&amp;color=darkgrey" frameborder="0"></iframe>
+            <iframe id="softphone" allow="camera *; microphone *" src={{frameWorkURL}} frameborder="0"></iframe>
         </div>
         <div class="w3-top">
             <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
@@ -19,6 +19,7 @@
                 {{!-- <div class="w3-right-align">
                     <a class="w3-bar-item w3-button w3-theme" {{action 'openModal' 'modal-main'}}><img src="https://dhqbrvplips7x.cloudfront.net/directory/5049/assets/images/svg/person.svg" width="30" height="30"></a>
                 </div> --}}
+                {{#link-to 'config' class="w3-bar-item w3-button w3-hide-small w3-hover-white"}}Config{{/link-to}}
             </div>
         </div>
         <div class="w3-sidebar w3-bar-block w3-black w3-medium" style="width:40px">
