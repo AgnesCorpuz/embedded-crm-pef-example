@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 
-export default Component.extend({
+export default Component.extend({    
     didInsertElement() {
         window.addEventListener("message", function(event) {
             var message = JSON.parse(event.data);
@@ -20,7 +20,9 @@ export default Component.extend({
                     }), "*");
                 } else if(message.type == "userActionSubscription"){
                     if(message.data.category == "status") {
-                        this.alert("User Status: " + message.data.data.status);
+                        this.alert("User Status: " + message.data.data.status); 
+                    } else if(message.data.category == "station") {
+                        
                     }
                 }
             }
@@ -30,6 +32,7 @@ export default Component.extend({
     actions: {
         setStatus: function(selected) {
             this.set("selectedStatus", selected);
+            alert("HI: " + this.get('userName'));
         },
         submit: function(){
             document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({

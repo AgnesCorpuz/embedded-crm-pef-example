@@ -1,7 +1,6 @@
 <html>
     <head>
         <h1>PureCloud Embedded Framework</h1>
-        <link rel="stylesheet" href="/styles/app.css">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
@@ -13,11 +12,38 @@
         </div>
         <div class="w3-top">
             <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
-                <a class="w3-bar-item w3-button w3-theme" href="/"><img src="/images/genesys_monogram_detail.png" width="50" height="50" alt="genesys.png"></a>
+                <a class="w3-bar-item w3-button w3-theme" href="/"><img src="/images/genesys_monogram_detail.png" width="50" height="50" alt="genesys.png"></a>                
                 <a class="w3-bar-item w3-button w3-hide-small w3-hover-white" href="/contacts">Contacts</a>
                 <a class="w3-bar-item w3-button w3-hide-small w3-hover-white" href="/accounts">Accounts</a>
+
+                {{!-- <div class="w3-right-align">
+                    <a class="w3-bar-item w3-button w3-theme" {{action 'openModal' 'modal-main'}}><img src="https://dhqbrvplips7x.cloudfront.net/directory/5049/assets/images/svg/person.svg" width="30" height="30"></a>
+                </div> --}}
             </div>
         </div>
+        <div class="w3-sidebar w3-bar-block w3-black w3-medium" style="width:40px">
+            <a class="w3-bar-item w3-button" {{action 'openModal' 'modal-main'}} style="padding:5px"><img src="https://dhqbrvplips7x.cloudfront.net/directory/5049/assets/images/svg/person.svg" width="30" height="30"></a>
+            <a href="#" class="w3-bar-item w3-button" style="padding:10px"><i class="fa fa-home"></i></a> 
+            <a href="#" class="w3-bar-item w3-button" style="padding:10px"><i class="fa fa-search"></i></a> 
+            <a href="#" class="w3-bar-item w3-button" style="padding:10px"><i class="fa fa-envelope"></i></a> 
+            <a href="#" class="w3-bar-item w3-button" style="padding:10px"><i class="fa fa-globe"></i></a>
+            <a href="#" class="w3-bar-item w3-button" style="padding:10px"><i class="fa fa-trash"></i></a> 
+        </div>
+        {{!-- <nav class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left" id="mySidebar">
+            <a class="w3-right w3-xlarge w3-padding-large w3-hover-black w3-hide-large" href="javascript:void(0)" onclick="w3_close()" title="Close Menu">
+                <i class="fa fa-remove"></i>
+            </a>
+            <h4 class="w3-bar-item">
+                <b>Menu</b>
+            </h4>
+            <a class="w3-bar-item w3-button w3-hover-black" href="#">Link</a>
+            <a class="w3-bar-item w3-button w3-hover-black" href="#">Link</a>
+            <a class="w3-bar-item w3-button w3-hover-black" href="#">Link</a>
+            <a class="w3-bar-item w3-button w3-hover-black" href="#">Link</a>
+        </nav> --}}
+        {{#profile-modal enabled=false title="--Profile Modal --" id="modal-main"}}
+            Modal text. Oh girl!
+        {{/profile-modal}}
     </body>
     <footer id="myFooter">
         <div class="w3-center">
