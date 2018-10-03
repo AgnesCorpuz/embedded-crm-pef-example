@@ -65,6 +65,11 @@ export default Component.extend({
 
         this.themes = [
             {
+                "name": "Default Grey",
+                "primary": "#666",
+                "text": "#fff"
+            },
+            {
                 "name": "PureCloud Blue",
                 "primary": "#41A7CA",
                 "text": "#fff"
@@ -100,9 +105,14 @@ export default Component.extend({
                 "text":  "#EAF2EF"
             },
             {
-                "name": "Doobie Dap",
+                "name": "Willie Dap",
                 "primary": "#333",
                 "text": "#FF9F6F"
+            },
+            {
+                "name": "Banana Ear",
+                "primary": "#FFFF93",
+                "text": "#000"
             }
         ];
     },

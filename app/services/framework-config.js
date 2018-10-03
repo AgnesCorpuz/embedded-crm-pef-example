@@ -15,9 +15,17 @@ export default Service.extend({
         this.set('dedicatedLoginWindow', true);
         this.set('userLanguage', "en-US");
         this.set('theme', {
-            'primary': '#666',
+            'primary': '#666', 
             'text': '#fff'
         });
+
+        // Custom Attributes 
+        // This is not saved in localStorage as this should be constant anyway
+        this.set('customAttributes', [
+            'PEF_URLPop',
+            'PEF_SearchValue',
+            'PEF_TransferContext'
+        ]);
 
 
         // Check if there are saved settings in the localstorage
