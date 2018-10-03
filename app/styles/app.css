@@ -38,7 +38,7 @@ html,body,h1,h2,h3,h4,h5,h6 {
 .w3-sidebar {
   z-index: 3;
   width: 250px;
-  top: 70px;
+  top: 40px;
   bottom: 0;
   height: inherit;
 }
@@ -132,7 +132,7 @@ td.rightSide {
 }
 .modal-frame {
   position: absolute;
-  top: 10%;
+  top: 40px;
   left: 2.3%;
   border: 1px solid #333;
   background: #f1f1f1;
