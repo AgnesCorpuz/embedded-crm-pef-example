@@ -15,9 +15,18 @@
         <div>
             Language: 
             <select onchange={{action 'setLanguage' value='target.value'}} name="userLanguage" id="userLanguage">
-                <option hidden value="">{{frameworkConfig.userLanguage}}</option>
+                <option hidden value="">- choose new language -</option>
                 {{#each languages as |language|}}
                     <option value={{language.code}}>{{language.language}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div>
+            Theme:
+            <select onchange={{action 'setTheme' value='target.value'}} name="theme" id="theme">
+                <option hidden value="">- choose new theme -</option>
+                {{#each themes as |theme|}}
+                    <option value={{theme.name}}>{{theme.name}}</option>
                 {{/each}}
             </select>
         </div>
