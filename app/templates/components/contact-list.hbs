@@ -1,45 +1,32 @@
-<h2>List of Contacts</h2>
-
-<div id="myBody" style="transition:margin-left .4s;">
-    <table>
-        <thead>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Company</th>
-            <th>Phone</th>
-            <th>Email</th>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Agnes</td>
-                <td>Corpuz</td>
-                <td>Genesys</td>
-                <td {{action "clickToDial" 3172222222}}><a href="">3172222222</a></td>
-                <td>testuser1@testdomain.com</td>
-            </tr>
-            <tr>
-                <td>Prince</td>
-                <td>Merluza</td>
-                <td>Genesys</td>
-                <td {{action "clickToDial" 3172222222}}><a href="">3172222222</a></td>
-                <td>testuser2@testdomain.com</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <h6 class="actionName">User Status Update</h6>
-    <select id='statusDropDown' onchange={{action "setStatus" value="target.value"}}>
-        <option disabled selected> -- Status -- </option>
-        <option value="ON_QUEUE">On Queue</option>
-        <option value="AVAILABLE">Available</option>
-        <option value="BUSY">Busy</option>
-        <option value="AWAY">Away</option>
-        <option value="BREAK">Break</option>
-        <option value="MEAL">Meal</option>
-        <option value="MEETING">Meeting</option>
-        <option value="TRAINING">Training</option>
-    </select>
-    <button {{action 'submit'}}>Submit</button>
+<div style="padding-left: 50px">
+    <h1 class="w3-text-deep-orange">List of Contacts</h1>
+    <div id="myBody">
+        <table>
+            <thead>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Company</th>
+                <th>Phone</th>
+                <th>Email</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Agnes</td>
+                    <td>Corpuz</td>
+                    <td>Genesys</td>
+                    <td {{action "clickToDial" 3172222222}}><a href="">3172222222</a></td>
+                    <td>testuser1@testdomain.com</td>
+                </tr>
+                <tr>
+                    <td>Prince</td>
+                    <td>Merluza</td>
+                    <td>Genesys</td>
+                    <td {{action "clickToDial" 3172222222}}><a href="">3172222222</a></td>
+                    <td>testuser2@testdomain.com</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 {{yield}}
