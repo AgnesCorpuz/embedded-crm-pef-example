@@ -17,6 +17,8 @@ export default Controller.extend({
         }
     },
 
+    frameworkConfig: service('framework-config'),
+
     init(){
         this._super(...arguments);
 
@@ -31,15 +33,18 @@ export default Controller.extend({
         `&enableCallLogs=${this.frameworkConfig.enableCallLogs}` +
         `&dedicatedLoginWindow=${this.frameworkConfig.dedicatedLoginWindow}` +
 
-        // Sogtphone language
+        // Softphone language
         `&userLanguage=${this.frameworkConfig.userLanguage}` +
+
+        // Custom Attributes
+        `&customAttributes=${this.frameworkConfig.customAttributes.join("+")}` + 
 
         // Theme
         `&primarycolor=${encodeURIComponent(this.frameworkConfig.theme.primary)}` +
         `&textcolor=${encodeURIComponent(this.frameworkConfig.theme.text)}`;
     },
 
-    frameworkConfig: service('framework-config'),
+    
     
     addListeners: function() {
         window.addEventListener("message", function(event) {

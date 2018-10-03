@@ -34,6 +34,7 @@ window.Framework = {
             enableTransferContext: true,
             searchTargets: ['people', 'queues', 'frameworkcontacts'],
 
+            // UI theme of the embedded softphone
             theme: {
                 primary: (() => {
                     let primarycolor = new URLSearchParams(window.location.search).get('primarycolor');
@@ -56,7 +57,13 @@ window.Framework = {
             CallLog: "https://help.mypurecloud.com/articles/about-call-logs/", 
             Settings: "https://help.mypurecloud.com/articles/about-settings/" 
         },
-        customInteractionAttributes: ['PEF_URLPop', 'PEF_SearchValue', 'PEF_TransferContext'],
+        customInteractionAttributes: (() => {
+            let customAttributes = new URLSearchParams(window.location.search).get('customAttributes');
+
+            if(!customAttributes) return [];
+
+            return customAttributes.split("+");
+        })(),
         getUserLanguage: function(callback) {
             let lang = new URLSearchParams(window.location.search).get('userLanguage');
             if(!lang){
