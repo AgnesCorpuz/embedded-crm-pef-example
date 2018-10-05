@@ -1,4 +1,4 @@
-<div style="padding-left: 50px">
+<div style="padding-left: 50px; padding-top: 10px">
     <h1 class="w3-text-deep-orange">List of Contacts</h1>
     <div id="myBody">
         <table>
@@ -9,21 +9,16 @@
                 <th>Phone</th>
                 <th>Email</th>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Agnes</td>
-                    <td>Corpuz</td>
-                    <td>Genesys</td>
-                    <td {{action "clickToDial" 16328406444}}><a href="">+632-840-6444</a></td>
-                    <td>testuser1@testdomain.com</td>
-                </tr>
-                <tr>
-                    <td>Prince</td>
-                    <td>Merluza</td>
-                    <td>Genesys</td>
-                    <td {{action "clickToDial" 3172222222}}><a href="">3172222222</a></td>
-                    <td>testuser2@testdomain.com</td>
-                </tr>
+            <tbody>                
+                {{#each contactList as |contact|}}
+                    <tr>
+                        <td>{{contact.FirstName}}</td>
+                        <td>{{contact.LastName}}</td>
+                        <td>{{contact.Account}}</td>
+                        <td  {{action "clickToDial" contact.Phone}}>{{contact.Phone}}</td>
+                        <td>{{contact.Email}}</td>
+                    </tr>                        
+                {{/each}}
             </tbody>
         </table>
     </div>

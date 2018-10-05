@@ -43,8 +43,6 @@ export default Controller.extend({
         `&primarycolor=${encodeURIComponent(this.frameworkConfig.theme.primary)}` +
         `&textcolor=${encodeURIComponent(this.frameworkConfig.theme.text)}`;
     },
-
-    
     
     addListeners: function() {
         window.addEventListener("message", function(event) {

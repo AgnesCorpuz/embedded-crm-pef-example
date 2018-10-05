@@ -1,0 +1,28 @@
+<div style="padding-left: 50px; padding-top: 10px">
+    <h1 class="w3-text-deep-orange">List of Accounts</h1>
+    <div id="myBody">
+        <ul>
+            {{#each accounts as |account|}}
+                <li><a href="" {{action 'toggle' account.Name}}>{{account.Name}}</a></li>
+            {{/each}}
+        </ul>
+    </div>
+
+    {{#if enabled}}
+        <h1 class="w3-text-deep-orange">{{selectedAccount}} Details</h1>
+        <div id="myBody">
+            <ul>
+                {{#each accountList as |account|}}
+                    <li><strong>Office: </strong>{{account.Office}}</li>
+                    <li><strong>Address: </strong>{{account.Address}}</li>
+                    <li><strong>Toll Free Number: </strong>{{account.TollFree}}</li>                    
+                {{/each}}
+            </ul>
+            <div>
+                {{#link-to "contacts" (query-params Account=selectedAccount)}}View Contacts{{/link-to}}
+            </div>
+        </div>
+    {{/if}}
+</div>
+
+{{yield}}

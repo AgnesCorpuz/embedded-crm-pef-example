@@ -12,21 +12,24 @@
         </div>
         <div class="w3-top">
             <div class="w3-bar w3-top w3-left-align w3-large" style="height: 40px; background: #ff4f1f;">
-                <a class="w3-bar-item w3-button w3-theme" style="padding: 0px" href="/"><img src="/images/genesys_monogram_detail.png" width="40" height="40" alt="genesys.png"></a>                
-                <a class="w3-bar-item w3-button w3-hide-small w3-hover-white" style="color: #FFFFFF;" href="/accounts">Accounts</a>
-                <a class="w3-bar-item w3-button w3-hide-small w3-hover-white" style="color: #FFFFFF;" href="/contacts">Contacts</a>                
+                {{#link-to 'about' class="w3-bar-item w3-button w3-theme genesysLogo"}}<img src="/images/genesys_monogram_detail.png" width="40" height="40" alt="genesys.png">{{/link-to}}
+                {{#link-to 'accounts' class="w3-bar-item w3-button w3-hide-small w3-hover-white w3-text-white"}}Accounts{{/link-to}}
+                {{#link-to 'contacts' (query-params Account=null) class="w3-bar-item w3-button w3-hide-small w3-hover-white w3-text-white"}}Contacts{{/link-to}}
                 {{#link-to 'config' class="w3-bar-item w3-button w3-hide-small w3-hover-white w3-text-white"}}Config{{/link-to}}
             </div>
         </div>
         <div class="w3-sidebar w3-bar-block w3-dark-grey w3-medium" style="width:40px;">
             <a class="w3-bar-item w3-button" {{action 'openModal' 'modal-main'}} style="padding:5px"><img src="https://dhqbrvplips7x.cloudfront.net/directory/5049/assets/images/svg/person.svg" width="30" height="30"></a>
-            <a href="/" class="w3-bar-item w3-button" style="padding:10px"><i class="fa fa-home"></i></a>
-            <a href="/accounts" class="w3-bar-item w3-button" style="padding:10px"><i class="fa fa-users"></i></a> 
-            <a href="/contacts" class="w3-bar-item w3-button" style="padding:10px"><i class="fa fa-address-book-o"></i></a>            
-            <a href="/config" class="w3-bar-item w3-button" style="padding:10px"><i class="fa fa-cogs"></i></a> 
+            {{#link-to 'about' class="w3-bar-item w3-button sidebar"}}<i class="fa fa-home"></i>{{/link-to}}
+            {{#link-to 'accounts' class="w3-bar-item w3-button sidebar"}}<i class="fa fa-users"></i>{{/link-to}}
+            {{#link-to 'contacts' (query-params Account=null) class="w3-bar-item w3-button sidebar"}}<i class="fa fa-address-book-o"></i>{{/link-to}}
+            {{#link-to 'config' class="w3-bar-item w3-button sidebar"}}<i class="fa fa-cogs"></i>{{/link-to}}
             <a href="https://github.com/AgnesCorpuz/PureCloud-Embedded-Framework" class="w3-bar-item w3-button" style="padding:10px"><i class="fa fa-github"></i></a>
-            <a href="https://developer.mypurecloud.com/api/embeddable-framework/" class="w3-bar-item w3-button" style="padding:10px"><i class="fa fa-question"></i></a> 
+            <a href="https://developer.mypurecloud.com/api/embeddable-framework/" class="w3-bar-item w3-button" style="padding:10px"><i class="fa fa-question"></i></a>
         </div>
+
+        {{outlet}}
+
         {{#profile-modal enabled=false title="-- Set Status --" id="modal-main"}}
             <ul>
                 <li onclick={{action "setStatus" "ON_QUEUE"}}>On Queue</li>
@@ -59,5 +62,3 @@
         </div>
     </footer>
 </html>
-
-{{outlet}}

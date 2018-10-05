@@ -5,7 +5,7 @@ body > div > iframe {
 }
 
 body {
-  padding-top: 50px;
+  padding-top: 10px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -150,4 +150,12 @@ td.rightSide {
 .modal-body {
   margin-top: 5px;
   padding: 10px;
+}
+
+.genesysLogo {
+  padding: 0px!important;
+}
+
+.sidebar {
+  padding:10px!important;
 }
