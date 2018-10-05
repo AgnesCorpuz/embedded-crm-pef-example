@@ -8,22 +8,29 @@ export default Component.extend({
                 "FirstName": "Agnes",
                 "LastName": "Corpuz",
                 "Account": "Genesys",
-                "Phone": "+632-840-6444",
+                "Phone": "+6328406444",
                 "Email": "testuser1@testdomain.com"
             },
             {
                 "FirstName": "Prince",
                 "LastName": "Merluza",
                 "Account": "Genesys",
-                "Phone": "3172222222",
+                "Phone": "+6328643338",
                 "Email": "testuser2@testdomain.com"
             },
             {
-                "FirstName": "Test",
-                "LastName": "User",
-                "Account": "Other",
-                "Phone": "3172222222",
+                "FirstName": "Larry",
+                "LastName": "Page",
+                "Account": "Google",
+                "Phone": "+13172222222",
                 "Email": "testuser3@testdomain.com"
+            },
+            {
+                "FirstName": "Mark",
+                "LastName": "Zuckerberg",
+                "Account": "Facebook",
+                "Phone": "+13172222222",
+                "Email": "testuser4@testdomain.com"
             }
         ];
 

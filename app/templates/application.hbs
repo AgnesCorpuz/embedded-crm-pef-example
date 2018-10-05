@@ -13,7 +13,7 @@
         <div class="w3-top">
             <div class="w3-bar w3-top w3-left-align w3-large" style="height: 40px; background: #ff4f1f;">
                 {{#link-to 'about' class="w3-bar-item w3-button w3-theme genesysLogo"}}<img src="/images/genesys_monogram_detail.png" width="40" height="40" alt="genesys.png">{{/link-to}}
-                {{#link-to 'accounts' class="w3-bar-item w3-button w3-hide-small w3-hover-white w3-text-white"}}Accounts{{/link-to}}
+                {{#link-to 'accounts' (query-params Account=null) class="w3-bar-item w3-button w3-hide-small w3-hover-white w3-text-white"}}Accounts{{/link-to}}
                 {{#link-to 'contacts' (query-params Account=null) class="w3-bar-item w3-button w3-hide-small w3-hover-white w3-text-white"}}Contacts{{/link-to}}
                 {{#link-to 'config' class="w3-bar-item w3-button w3-hide-small w3-hover-white w3-text-white"}}Config{{/link-to}}
             </div>
@@ -21,7 +21,7 @@
         <div class="w3-sidebar w3-bar-block w3-dark-grey w3-medium" style="width:40px;">
             <a class="w3-bar-item w3-button" {{action 'openModal' 'modal-main'}} style="padding:5px"><img src="https://dhqbrvplips7x.cloudfront.net/directory/5049/assets/images/svg/person.svg" width="30" height="30"></a>
             {{#link-to 'about' class="w3-bar-item w3-button sidebar"}}<i class="fa fa-home"></i>{{/link-to}}
-            {{#link-to 'accounts' class="w3-bar-item w3-button sidebar"}}<i class="fa fa-users"></i>{{/link-to}}
+            {{#link-to 'accounts' (query-params Account=null) class="w3-bar-item w3-button sidebar"}}<i class="fa fa-users"></i>{{/link-to}}
             {{#link-to 'contacts' (query-params Account=null) class="w3-bar-item w3-button sidebar"}}<i class="fa fa-address-book-o"></i>{{/link-to}}
             {{#link-to 'config' class="w3-bar-item w3-button sidebar"}}<i class="fa fa-cogs"></i>{{/link-to}}
             <a href="https://github.com/AgnesCorpuz/PureCloud-Embedded-Framework" class="w3-bar-item w3-button" style="padding:10px"><i class="fa fa-github"></i></a>
@@ -44,16 +44,6 @@
         {{/profile-modal}}
     </body>
     <footer id="myFooter">
-        <div class="w3-center">
-            <div class="w3-bar">
-                <a class="w3-button w3-black" href="#">1</a>
-                <a class="w3-button w3-hover-black" href="#">2</a>
-                <a class="w3-button w3-hover-black" href="#">3</a>
-                <a class="w3-button w3-hover-black" href="#">4</a>
-                <a class="w3-button w3-hover-black" href="#">5</a>
-                <a class="w3-button w3-hover-black" href="#">»</a>
-            </div>
-        </div>
         <div class="w3-container" style="background-color: #5d3e5d">
             <p style="text-align:center; margin: 0px; color: #FFFFFF;">PureCloud Embedded Framework</p>
         </div>
