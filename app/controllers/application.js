@@ -37,7 +37,7 @@ export default Controller.extend({
         `&userLanguage=${this.frameworkConfig.userLanguage}` +
 
         // Custom Attributes
-        `&customAttributes=${this.frameworkConfig.customAttributes.join("+")}` + 
+        `&customAttributes=${this.frameworkConfig.customAttributes.join(",")}` + 
 
         // Theme
         `&primarycolor=${encodeURIComponent(this.frameworkConfig.theme.primary)}` +
