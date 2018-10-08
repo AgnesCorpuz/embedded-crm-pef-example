@@ -6,9 +6,7 @@ export default Controller.extend({
     Account: null,
 
     filteredAccounts: computed('Account', function() {
-        let account = this.Account;
-
-        if (account) {
+        if (this.Account) {
             var accounts = this.accounts;
             this.toggleProperty('enabled');
             this.set("selectedAccount", name);

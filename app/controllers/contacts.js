@@ -6,14 +6,9 @@ export default Controller.extend({
     Account: null,
 
     filteredAccounts: computed('Account', function() {
-        let account = this.Account;
-        var contactList;
-
-        if (account) {
-            contactList = this.contacts.filterBy('Account', account);
-            this.contactList = contactList;
+        if (this.Account) {
+            this.contactList = this.contacts.filterBy('Account', this.Account);
         } else {
-            contactList = this.contacts;
             this.contactList = this.contacts;
         }
     })

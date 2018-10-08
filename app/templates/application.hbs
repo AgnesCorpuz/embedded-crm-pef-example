@@ -15,6 +15,7 @@
                 {{#link-to 'about' class="w3-bar-item w3-button w3-theme genesysLogo"}}<img src="/images/genesys_monogram_detail.png" width="40" height="40" alt="genesys.png">{{/link-to}}
                 {{#link-to 'accounts' (query-params Account=null) class="w3-bar-item w3-button w3-hide-small w3-hover-white w3-text-white"}}Accounts{{/link-to}}
                 {{#link-to 'contacts' (query-params Account=null) class="w3-bar-item w3-button w3-hide-small w3-hover-white w3-text-white"}}Contacts{{/link-to}}
+                {{#link-to 'callLog' class="w3-bar-item w3-button w3-hide-small w3-hover-white w3-text-white"}}Call Logs{{/link-to}}
                 {{#link-to 'config' class="w3-bar-item w3-button w3-hide-small w3-hover-white w3-text-white"}}Config{{/link-to}}
             </div>
         </div>
@@ -23,6 +24,7 @@
             {{#link-to 'about' class="w3-bar-item w3-button sidebar"}}<i class="fa fa-home"></i>{{/link-to}}
             {{#link-to 'accounts' (query-params Account=null) class="w3-bar-item w3-button sidebar"}}<i class="fa fa-users"></i>{{/link-to}}
             {{#link-to 'contacts' (query-params Account=null) class="w3-bar-item w3-button sidebar"}}<i class="fa fa-address-book-o"></i>{{/link-to}}
+            {{#link-to 'callLog' class="w3-bar-item w3-button sidebar"}}<i class="fa fa-phone-square"></i>{{/link-to}}
             {{#link-to 'config' class="w3-bar-item w3-button sidebar"}}<i class="fa fa-cogs"></i>{{/link-to}}
             <a href="https://github.com/AgnesCorpuz/PureCloud-Embedded-Framework" class="w3-bar-item w3-button" style="padding:10px"><i class="fa fa-github"></i></a>
             <a href="https://developer.mypurecloud.com/api/embeddable-framework/" class="w3-bar-item w3-button" style="padding:10px"><i class="fa fa-question"></i></a>

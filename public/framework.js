@@ -62,7 +62,7 @@ window.Framework = {
 
             if(!customAttributes) return [];
 
-            return customAttributes.split("+");
+            return customAttributes.split(",");
         })(),
         getUserLanguage: function(callback) {
             let lang = new URLSearchParams(window.location.search).get('userLanguage');
@@ -105,22 +105,36 @@ window.Framework = {
                     if(contactSearchCallback) {
                         contactSearchCallback(message.data);
                     }
+                } else if(message.type == "addAssociation"){
+                    console.log("PEF: ADD ASSOCIATION || " + event.data);
+                    window.PureCloud.addAssociation(message.data);
+                } else if(message.type == "addAttribute"){
+                    console.log("PEF: ADD ATTRIBUTE || " + event.data);
+                    window.PureCloud.addCustomAttributes(message.data);
                 } else if(message.type == "updateUserStatus"){
                     window.PureCloud.User.updateStatus(message.data);
                 }
             }
         });
     },
-    screenPop: function (searchString, interaction) {
+    screenPop: (searchString, interaction) => {
         window.parent.postMessage(JSON.stringify({type:"screenPop", data:{searchString:searchString, interactionId:interaction}}) , this.crmDomain);
     },
-    processCallLog: function (callLog, interaction, eventName, onSuccess, onFailure) {
-        
+    processCallLog: (callLog, interaction, eventName, onSuccess, onFailure) => {
+        window.parent.postMessage(JSON.stringify({type:"processCallLog" , data:{callLog:callLog, interactionId:interaction, eventName:eventName}}) , this.crmDomain);
+        var success = true;
+        if (success) {
+            onSuccess({
+                id: callLog.id || Date.now()
+            });
+        } else {
+            onFailure();
+        }
     },
-    openCallLog: function(callLog, interaction){
-        
+    openCallLog: (callLog, interaction) => {
+        window.parent.postMessage(JSON.stringify({type:"openCallLog" , data:{callLog:callLog, interaction:interaction}}) , this.crmDomain);
     },
-    contactSearch: function(searchString, onSuccess, onFailure) {
+    contactSearch: (searchString, onSuccess, onFailure) => {
         contactSearchCallback = onSuccess;
         window.parent.postMessage(JSON.stringify({type:"contactSearch" , data:{searchString:searchString}}) , this.crmDomain);
     }

@@ -11,6 +11,7 @@ Router.map(function() {
   this.route('about');
   this.route('config');
   this.route('accounts');
+  this.route('callLog');
 });
 
 export default Router;

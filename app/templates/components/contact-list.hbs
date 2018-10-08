@@ -15,7 +15,7 @@
                     <td>{{contact.FirstName}}</td>
                     <td>{{contact.LastName}}</td>
                     <td>{{#link-to "accounts" (query-params Account=contact.Account)}}{{contact.Account}}{{/link-to}}</td>
-                    <td {{action "clickToDial" contact.Phone}}>{{contact.Phone}}</td>
+                    <td><a href="" {{action "clickToDial" contact.Phone}}>{{contact.Phone}}</a></td>
                     <td>{{contact.Email}}</td>
                 </tr>                        
             {{/each}}

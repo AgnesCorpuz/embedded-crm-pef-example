@@ -24,7 +24,8 @@ export default Service.extend({
         this.set('customAttributes', [
             'PEF_URLPop',
             'PEF_SearchValue',
-            'PEF_TransferContext'
+            'PEF_TransferContext',
+            'PEF_ExampleWorkspaceKey'
         ]);
 
 

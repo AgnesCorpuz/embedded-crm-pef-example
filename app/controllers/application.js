@@ -2,7 +2,7 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({
-    selectedStatus: null,
+    selectedStatus: null,    
     actions: {
         openModal: function(target) {
             var modal = this.get('comp-' + target);
@@ -37,20 +37,24 @@ export default Controller.extend({
         `&userLanguage=${this.frameworkConfig.userLanguage}` +
 
         // Custom Attributes
-        `&customAttributes=${this.frameworkConfig.customAttributes.join("+")}` + 
+        `&customAttributes=${this.frameworkConfig.customAttributes.join(",")}` + 
 
         // Theme
         `&primarycolor=${encodeURIComponent(this.frameworkConfig.theme.primary)}` +
         `&textcolor=${encodeURIComponent(this.frameworkConfig.theme.text)}`;
     },
-    
+
+    callLogService: service('call-log'),
     addListeners: function() {
-        window.addEventListener("message", function(event) {
+        var interactionID = null;
+
+        window.addEventListener("message", (event) => {
             var message = JSON.parse(event.data);
-            
+                        
             if(message){
                 if(message.type == "screenPop"){
                     // document.getElementById("screenPopPayload").value = event.data;
+                    interactionID = message.data.interactionId.id;
                 } else if(message.type == "contactSearch") {
                     document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
                         type: 'sendContactSearch',
@@ -64,7 +68,19 @@ export default Controller.extend({
                 } else if(message.type == "userActionSubscription"){
                     if(message.data.category == "status") {
                         toastr.info("User Status: " + message.data.data.status);
+                    } else if (message.data.category == "view" && message.data.data === "CallLog"){
+                        document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
+                            type: 'addAssociation',
+                            data: {"type":"contact", "id":"1234", "text":"Weather Line", "select": true}
+                        }), "*");
+
+                        document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
+                            type: 'addAttribute',
+                            data: {"interactionId": interactionID,"attributes": {"PEF_ExampleWorkspaceKey": "https://exampleworkspaceurl.com"}}
+                        }), "*");
                     }
+                }  else if(message.type == "processCallLog"){
+                    this.callLogService.processCallLog.pushObject(message);
                 }
             }
         });
