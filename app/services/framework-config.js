@@ -1,11 +1,6 @@
 import Service from '@ember/service';
 
 export default Service.extend({
-    embedWebRTCByDefault: true,
-    enableCallLogs: true, 
-    dedicatedLoginWindow: true,
-    userLanguage: "",
-
     init(){
         this._super(...arguments);
         
@@ -14,6 +9,8 @@ export default Service.extend({
         this.set('enableCallLogs', true);
         this.set('dedicatedLoginWindow', true);
         this.set('userLanguage', "en-US");
+        this.set('enablePEFUrlPop', true);
+        this.set('enablePEFSearchValue', true);
         this.set('theme', {
             'primary': '#666', 
             'text': '#fff'
@@ -43,6 +40,12 @@ export default Service.extend({
 
         if(localStorage.getItem("theme") !== null) 
             this.set('theme', JSON.parse(localStorage.getItem("theme")));
+
+        if(localStorage.getItem("enablePEFUrlPop") !== null) 
+            this.set('enablePEFUrlPop', JSON.parse(localStorage.getItem("enablePEFUrlPop")));
+
+        if(localStorage.getItem("enablePEFSearchValue") !== null) 
+            this.set('enablePEFSearchValue', JSON.parse(localStorage.getItem("enablePEFSearchValue")));
     },
 
     saveConfiguration(){
@@ -51,5 +54,7 @@ export default Service.extend({
         localStorage.setItem('dedicatedLoginWindow', this.dedicatedLoginWindow);
         localStorage.setItem('userLanguage', this.userLanguage);
         localStorage.setItem('theme', JSON.stringify(this.theme));
+        localStorage.setItem('enablePEFUrlPop', JSON.stringify(this.enablePEFUrlPop));
+        localStorage.setItem('enablePEFSearchValue', JSON.stringify(this.enablePEFSearchValue));
     }
 });

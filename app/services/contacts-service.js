@@ -48,7 +48,11 @@ export default Service.extend({
     },
 
     searchContact(queryString){
-        let qs = decodeURI(queryString.toLowerCase());
+        console.log(queryString);
+        let qs = decodeURIComponent(queryString).toLowerCase();
+        console.log(qs);
+        console.log(this.contacts);
+
         let results = this.contacts.filter((contact) => (
                 contact.FirstName.toLowerCase().includes(qs) ||
                 contact.LastName.toLowerCase().includes(qs)||
