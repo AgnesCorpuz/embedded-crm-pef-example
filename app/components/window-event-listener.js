@@ -32,9 +32,14 @@ export default Component.extend({
                         this.get('router').transitionTo(urlpop);
 
                     }else if(this.frameworkService.enablePEFSearchValue){
-                        
+                        let searchVal = attributes.pef_searchvalue;
 
-                        let searchVal = encodeURIComponent(attributes.pef_searchvalue);
+                        // Check if E.164 ANI is used for searching and strip the 'tel:'
+                        if(searchVal.substring(0,4).toLowerCase().localeCompare("tel:") === 0){
+                            searchVal = searchVal.substring(4);
+                        }
+                        
+                        searchVal = encodeURIComponent(searchVal);
                         
                         console.log('================================');
                         console.log('PEF SEARCHVALUE DETECTED ' + searchVal);

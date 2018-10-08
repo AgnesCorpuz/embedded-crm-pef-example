@@ -19,7 +19,7 @@ export default Service.extend({
                 "FirstName": "Prince",
                 "LastName": "Merluza",
                 "Account": "Genesys",
-                "Phone": "+6328643338",
+                "Phone": "+13179576842",
                 "Email": "testuser2@testdomain.com"
             },
             {
