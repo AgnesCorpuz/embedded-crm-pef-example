@@ -13,6 +13,7 @@ Router.map(function() {
   this.route('about');
   this.route('config');
   this.route('accounts');
+  this.route('search');
 });
 
 export default Router;

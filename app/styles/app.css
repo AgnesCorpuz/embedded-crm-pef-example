@@ -177,3 +177,22 @@ td.rightSide {
 .sidebar {
   padding:10px!important;
 }
+
+.header-search{
+  color:white;
+  background-color: #ff8060;
+  border: 0;
+  height: 30px;
+  margin-top:5px;
+  margin-left:20px;
+}
+
+.searchicon { 
+  position: absolute;
+  text-align: right; 
+  top: 4px;
+  right:10px;
+  color: white;
+}
+
+.wrapper { position: relative; }

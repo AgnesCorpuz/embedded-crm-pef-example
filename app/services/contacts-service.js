@@ -1,5 +1,6 @@
 import Service from '@ember/service';
 
+// TODO: Move contacts into initializer or stubbing library. 
 export default Service.extend({
     init(){
         this._super(...arguments);
@@ -39,9 +40,25 @@ export default Service.extend({
             }
         ];
     },
+
     getContact(contactId){
         let contact = this.contacts.filter((contact) => 
                             contact.id === contactId);
         return contact[0];
+    },
+
+    searchContact(queryString){
+        let qs = decodeURI(queryString.toLowerCase());
+        let results = this.contacts.filter((contact) => (
+                contact.FirstName.toLowerCase().includes(qs) ||
+                contact.LastName.toLowerCase().includes(qs)||
+                contact.Account.toLowerCase().includes(qs) ||
+                contact.Phone.toLowerCase().includes(qs) ||
+                contact.Email.toLowerCase().includes(qs)
+            )
+        );
+        console.log('==============================');
+        console.log(results);
+        return results;
     }
 });
