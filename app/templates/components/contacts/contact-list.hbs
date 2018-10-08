@@ -19,7 +19,9 @@
                     </td>
                     <td>{{contact.LastName}}</td>
                     <td>{{#link-to "accounts" (query-params Account=contact.Account)}}{{contact.Account}}{{/link-to}}</td>
-                    <td {{action "clickToDial" contact.Phone}}>{{contact.Phone}}</td>
+                    <td>
+                        {{phone-number phoneNumber=contact.Phone}} 
+                    </td>
                     <td>{{contact.Email}}</td>
                 </tr>                        
             {{/each}}
