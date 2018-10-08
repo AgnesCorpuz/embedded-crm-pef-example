@@ -5,11 +5,11 @@ export default Controller.extend({
     queryParams: ['Account'],
     Account: null,
 
-    filteredAccounts: computed('Account', function() {
+    contactList: computed('Account', function() {
         if (this.Account) {
-            this.contactList = this.contacts.filterBy('Account', this.Account);
+            return this.contacts.filterBy('Account', this.Account);
         } else {
-            this.contactList = this.contacts;
+            return this.contacts;
         }
     })
 });
