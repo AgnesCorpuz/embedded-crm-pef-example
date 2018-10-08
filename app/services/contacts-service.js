@@ -1,10 +1,12 @@
-import Component from '@ember/component';
+import Service from '@ember/service';
 
-export default Component.extend({
+export default Service.extend({
     init(){
         this._super(...arguments);
+
         this.contacts = [
             {
+                "id": "1",
                 "FirstName": "Agnes",
                 "LastName": "Corpuz",
                 "Account": "Genesys",
@@ -12,6 +14,7 @@ export default Component.extend({
                 "Email": "testuser1@testdomain.com"
             },
             {
+                "id": "2",
                 "FirstName": "Prince",
                 "LastName": "Merluza",
                 "Account": "Genesys",
@@ -19,6 +22,7 @@ export default Component.extend({
                 "Email": "testuser2@testdomain.com"
             },
             {
+                "id": "3",
                 "FirstName": "Larry",
                 "LastName": "Page",
                 "Account": "Google",
@@ -26,6 +30,7 @@ export default Component.extend({
                 "Email": "testuser3@testdomain.com"
             },
             {
+                "id": "4",
                 "FirstName": "Mark",
                 "LastName": "Zuckerberg",
                 "Account": "Facebook",
@@ -33,24 +38,10 @@ export default Component.extend({
                 "Email": "testuser4@testdomain.com"
             }
         ];
-
-        var contactList;
-        var account = new URLSearchParams(window.location.search).get('Account');
-
-        if (account) {
-            contactList = this.contacts.filterBy('Account', account);
-            this.contactList = contactList;
-        } else {
-            contactList = this.contacts;
-            this.contactList = this.contacts;
-        }
     },
-    actions: {
-        clickToDial(num) {
-            document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
-                type: 'clickToDial',
-                data: { number: num, autoPlace: true }
-            }), "*");
-        }
+    getContact(contactId){
+        let contact = this.contacts.filter((contact) => 
+                            contact.id === contactId);
+        return contact[0];
     }
 });

@@ -12,7 +12,11 @@
         <tbody>                
             {{#each contactList as |contact|}}
                 <tr>
-                    <td>{{contact.FirstName}}</td>
+                    <td>
+                        {{#link-to 'contacts.contact' contact.id}}
+                            {{contact.FirstName}}
+                        {{/link-to}}
+                    </td>
                     <td>{{contact.LastName}}</td>
                     <td>{{#link-to "accounts" (query-params Account=contact.Account)}}{{contact.Account}}{{/link-to}}</td>
                     <td {{action "clickToDial" contact.Phone}}>{{contact.Phone}}</td>
