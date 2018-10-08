@@ -5,16 +5,13 @@ export default Controller.extend({
     queryParams: ['Account'],
     Account: null,
 
-    filteredAccounts: computed('Account', function() {
+    contactList: computed('Account', function() {
         let account = this.Account;
-        var contactList;
 
         if (account) {
-            contactList = this.contacts.filterBy('Account', account);
-            this.contactList = contactList;
+            return this.contacts.filterBy('Account', account);
         } else {
-            contactList = this.contacts;
-            this.contactList = this.contacts;
+            return this.contacts;
         }
     })
 });

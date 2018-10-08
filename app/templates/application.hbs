@@ -7,6 +7,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
+        
+        {{window-event-listener}}
+
         <div class="softphone">
             <iframe id="softphone" allow="camera *; microphone *" src={{frameWorkURL}} frameborder="0"></iframe>
         </div>
@@ -16,6 +19,11 @@
                 {{#link-to 'accounts' (query-params Account=null) class="w3-bar-item w3-button w3-hide-small w3-hover-white w3-text-white"}}Accounts{{/link-to}}
                 {{#link-to 'contacts' (query-params Account=null) class="w3-bar-item w3-button w3-hide-small w3-hover-white w3-text-white"}}Contacts{{/link-to}}
                 {{#link-to 'config' class="w3-bar-item w3-button w3-hide-small w3-hover-white w3-text-white"}}Config{{/link-to}}
+                
+                <span class="wrapper">
+                    {{input value=queryString type="text" class="header-search" enter=(action "search")}}    
+                    <span class="fa fa-search searchicon"></span>
+                </span>
             </div>
         </div>
         <div class="w3-sidebar w3-bar-block w3-dark-grey w3-medium" style="width:40px;">

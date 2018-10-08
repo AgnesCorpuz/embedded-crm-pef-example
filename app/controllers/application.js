@@ -2,6 +2,8 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({
+    frameworkConfig: service('framework-config'),
+
     selectedStatus: null,
     actions: {
         openModal: function(target) {
@@ -14,13 +16,21 @@ export default Controller.extend({
                 type: 'updateUserStatus',
                 data: { id: this.get('selectedStatus') }
             }), "*");
+        },
+        search(){
+            this.transitionToRoute('search', {
+                queryParams: {
+                    query: this.queryString
+                }   
+            });
         }
     },
 
-    frameworkConfig: service('framework-config'),
-
     init(){
         this._super(...arguments);
+
+        // For searching
+        this.queryString = null;
 
         // Dynamically build the URL for the Embedded Softphone
         this.frameWorkURL = 
@@ -37,7 +47,7 @@ export default Controller.extend({
         `&userLanguage=${this.frameworkConfig.userLanguage}` +
 
         // Custom Attributes
-        `&customAttributes=${this.frameworkConfig.customAttributes.join("+")}` + 
+        `&customAttributes=${this.frameworkConfig.customAttributes.join(",")}` + 
 
         // Theme
         `&primarycolor=${encodeURIComponent(this.frameworkConfig.theme.primary)}` +

@@ -62,7 +62,7 @@ window.Framework = {
 
             if(!customAttributes) return [];
 
-            return customAttributes.split("+");
+            return customAttributes.split(",");
         })(),
         getUserLanguage: function(callback) {
             let lang = new URLSearchParams(window.location.search).get('userLanguage');
@@ -111,16 +111,22 @@ window.Framework = {
             }
         });
     },
-    screenPop: function (searchString, interaction) {
-        window.parent.postMessage(JSON.stringify({type:"screenPop", data:{searchString:searchString, interactionId:interaction}}) , this.crmDomain);
+    screenPop: (searchString, interaction) => {
+        window.parent.postMessage(JSON.stringify({
+            type:"screenPop", 
+            data: {
+                searchString:searchString, 
+                interactionId:interaction
+            }
+        }) , this.crmDomain);
     },
-    processCallLog: function (callLog, interaction, eventName, onSuccess, onFailure) {
+    processCallLog: (callLog, interaction, eventName, onSuccess, onFailure) => {
         
     },
-    openCallLog: function(callLog, interaction){
+    openCallLog: (callLog, interaction) => {
         
     },
-    contactSearch: function(searchString, onSuccess, onFailure) {
+    contactSearch: (searchString, onSuccess, onFailure) => {
         contactSearchCallback = onSuccess;
         window.parent.postMessage(JSON.stringify({type:"contactSearch" , data:{searchString:searchString}}) , this.crmDomain);
     }
