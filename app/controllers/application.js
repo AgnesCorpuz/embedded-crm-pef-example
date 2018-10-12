@@ -5,7 +5,6 @@ export default Controller.extend({
     frameworkConfig: service('framework-config'),
     contactsService: service('contacts-service'),
     selectedStatus: null,
-    interactionId: null,
 
     actions: {
         openModal: function(target) {
@@ -62,7 +61,7 @@ export default Controller.extend({
                         
             if(message){
                 if(message.type == "screenPop"){
-                    this.interactionId = message.data.interactionId.id;
+                    this.contactsService.interactionId = message.data.interactionId.id;
                 } else if(message.type == "contactSearch") {
                     document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
                         type: 'sendContactSearch',
@@ -83,36 +82,36 @@ export default Controller.extend({
                     var arrayBuilder = {};
                     var logs = this.get('contactsService.logs');
 
-                    if(logs.length == 0) {
-                        arrayBuilder.interactionId = message.data.interactionId.id;
-                        arrayBuilder.ani = message.data.interactionId.ani;
+                    arrayBuilder.interactionId = message.data.interactionId.id;
+                    arrayBuilder.ani = message.data.interactionId.ani;
 
-                        if(message.data.callLog.hasOwnProperty('notes')) {
-                            arrayBuilder.notes = message.data.callLog.notes;
-                        } else {
-                            arrayBuilder.notes = "";
-                        }
+                    if(message.data.callLog.hasOwnProperty('notes')) {
+                        arrayBuilder.notes = message.data.callLog.notes;
+                    } else {
+                        arrayBuilder.notes = "";
+                    }
 
-                        if(message.data.callLog.hasOwnProperty('attributes')) {
-                            if(message.data.callLog.attributes.hasOwnProperty('pef_priority')) { 
-                                arrayBuilder.attr = message.data.callLog.attributes.pef_priority;
-                            }  else {
-                                arrayBuilder.attr = "";
-                            }
-                        } else {
+                    if(message.data.callLog.hasOwnProperty('attributes')) {
+                        if(message.data.callLog.attributes.hasOwnProperty('pef_priority')) { 
+                            arrayBuilder.attr = message.data.callLog.attributes.pef_priority;
+                        }  else {
                             arrayBuilder.attr = "";
                         }
-
-                        if(message.data.callLog.hasOwnProperty('selectedContact')) {
-                            arrayBuilder.assoc = message.data.callLog.selectedContact.text;
-                        } else {
-                            arrayBuilder.assoc = "";
-                        }
-                        
-                        this.contactsService.logs.pushObject(arrayBuilder);
                     } else {
+                        arrayBuilder.attr = "";
+                    }
+
+                    if(message.data.callLog.hasOwnProperty('selectedContact')) {
+                        arrayBuilder.assoc = message.data.callLog.selectedContact.text;
+                    } else {
+                        arrayBuilder.assoc = "";
+                    }
+                    
+                    this.contactsService.logs.pushObject(arrayBuilder);
+
+                    if(logs.length > 0) {
                         for (var i = 0, len = logs.length; i < len; i++) {
-                            if(logs[i].interactionId == this.interactionId) {
+                            if(logs[i].interactionId == this.contactsService.interactionId) {
                                 if(logs[i].notes == "") {
                                     if(message.data.callLog.hasOwnProperty('notes')) {
                                         arrayBuilder.notes = message.data.callLog.notes;
