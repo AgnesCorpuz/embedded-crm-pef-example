@@ -50,6 +50,15 @@ window.Framework = {
     
                     return decodeURI(textcolor);
                 })()
+            },
+            display: {
+                interactionDetails: {
+                    call: [
+                        "participant.PEF_Priority",
+                        "call.Ani",
+                        "call.ConversationId"
+                    ]
+                }
             }
         },
         helpLinks: {
@@ -122,6 +131,7 @@ window.Framework = {
     },
     processCallLog: (callLog, interaction, eventName, onSuccess, onFailure) => {
         window.parent.postMessage(JSON.stringify({type:"processCallLog" , data:{callLog:callLog, interactionId:interaction, eventName:eventName}}) , this.crmDomain);
+        console.log("PEF: PROCSS CALL LOG || " + JSON.stringify({type:"processCallLog" , data:{callLog:callLog, interactionId:interaction, eventName:eventName}}));
         var success = true;
         if (success) {
             onSuccess({

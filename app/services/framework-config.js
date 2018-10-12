@@ -22,7 +22,7 @@ export default Service.extend({
             'PEF_URLPop',
             'PEF_SearchValue',
             'PEF_TransferContext',
-            'PEF_ExampleWorkspaceKey'
+            'PEF_Priority'
         ]);
 
 

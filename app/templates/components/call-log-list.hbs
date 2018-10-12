@@ -8,17 +8,15 @@
             <th>Notes</th>
             <th>Attributes</th>
             <th>Association</th>
-            <th>Association ID</th>
         </thead>
-        <tbody>                
+        <tbody>
             {{#each callLogs as |log|}}
                 <tr>
-                    <td>{{log.data.interactionId.id}}</td>
-                    <td>{{log.data.interactionId.ani}}</td>
-                    <td>{{log.data.callLog.notes}}</td>
-                    <td>{{log.data.callLog.attributes.pef_exampleworkspacekey}}</td>
-                    <td>{{log.data.callLog.selectedContact.text}}</td>
-                    <td>{{log.data.callLog.selectedContact.id}}</td>
+                    <td>{{log.interactionId}}</td>
+                    <td>{{log.ani}}</td>
+                    <td>{{log.notes}}</td>
+                    <td>{{log.attr}}</td>
+                    <td>{{log.assoc}}</td>
                 </tr>                        
             {{/each}}
         </tbody>

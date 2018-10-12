@@ -2,8 +2,12 @@ import Service from '@ember/service';
 
 // TODO: Move contacts into initializer or stubbing library. 
 export default Service.extend({
+    processCallLog: null,
+    logs: null,
     init(){
         this._super(...arguments);
+        this.set('processCallLog', []);
+        this.set('logs', []);
 
         this.contacts = [
             {
@@ -12,7 +16,8 @@ export default Service.extend({
                 "LastName": "Corpuz",
                 "Account": "Genesys",
                 "Phone": "+6328406444",
-                "Email": "testuser1@testdomain.com"
+                "Email": "testuser1@testdomain.com",
+                "Priority": "Gold"
             },
             {
                 "id": "2",
@@ -20,7 +25,8 @@ export default Service.extend({
                 "LastName": "Merluza",
                 "Account": "Genesys",
                 "Phone": "+13179576842",
-                "Email": "testuser2@testdomain.com"
+                "Email": "testuser2@testdomain.com",
+                "Priority": "Gold"
             },
             {
                 "id": "3",
@@ -28,7 +34,8 @@ export default Service.extend({
                 "LastName": "Page",
                 "Account": "Google",
                 "Phone": "+13172222222",
-                "Email": "testuser3@testdomain.com"
+                "Email": "testuser3@testdomain.com",
+                "Priority": "Platinum"
             },
             {
                 "id": "4",
@@ -36,7 +43,8 @@ export default Service.extend({
                 "LastName": "Zuckerberg",
                 "Account": "Facebook",
                 "Phone": "+13172222222",
-                "Email": "testuser4@testdomain.com"
+                "Email": "testuser4@testdomain.com",
+                "Priority": "Silver"
             }
         ];
     },
