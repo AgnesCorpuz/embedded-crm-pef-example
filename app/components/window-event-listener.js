@@ -115,9 +115,25 @@ export default Component.extend({
                         }
                     })());
 
+                    // Call the Framework to request the transcript
+                    document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
+                        type: 'getTranscript',
+                        data: {
+                            'interactionId': interaction.id
+                        }
+                    }), "*");
+                    
                     console.log('======================');
                     console.log(entryRef);
                     console.log(this.contactsService.chatLogs);
+                
+                
+                } else if(message.type == "chatTranscript"){
+                    let entryRef = this.contactsService.chatLogs.filter((log) => 
+                        log.id.localeCompare(message.interactionId) == 0
+                    )[0];
+
+                    entryRef.set('transcript', JSON.stringify(message.data));
                 }
             }
         });
