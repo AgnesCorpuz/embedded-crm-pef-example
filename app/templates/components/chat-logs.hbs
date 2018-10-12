@@ -18,7 +18,11 @@
                     <td>{{log.notes}}</td>
                     <td>{{log.priority}}</td>
                     <td>{{log.assosciation}}</td>
-                    <td>{{log.transcript}}</td>
+                    <td>
+                        {{#link-to "transcript.id" log.id}}
+                            Show
+                        {{/link-to}}
+                    </td>
                 </tr>                        
             {{/each}}
         </tbody>

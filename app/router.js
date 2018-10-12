@@ -15,6 +15,10 @@ Router.map(function() {
   this.route('accounts');
   this.route('callLog');
   this.route('search');
+
+  this.route('transcript', function() {
+    this.route('id', { path: '/:interaction_id' });
+  });
 });
 
 export default Router;
