@@ -3,7 +3,7 @@ import { inject as service } from '@ember/service';
 
 export default Component.extend({
     frameworkService: service('framework-config'),
-    contactService: service('contacts-service'),
+    contactsService: service('contacts-service'),
     router: service('router'),
 
     // TODO: Consolidate assignment of event listener to this Controller
@@ -44,11 +44,17 @@ export default Component.extend({
                         console.log('================================');
                         console.log('PEF SEARCHVALUE DETECTED ' + searchVal);
                         
-                        this.get('router').transitionTo('search', {
-                            queryParams: {
-                                query: decodeURIComponent(searchVal)
-                            }
-                        });
+                        let results = this.contactsService.searchContact(searchVal);
+                        if(results.length == 1){
+                            console.log("JUST 1!");
+                            this.get('router').transitionTo('contacts.contact', results[0].id);
+                        }else{
+                            this.get('router').transitionTo('search', {
+                                queryParams: {
+                                    query: searchVal
+                                }   
+                            });
+                        }
                     }else{
                         // TODO: Default behavior for screen pop
                     }

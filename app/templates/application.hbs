@@ -22,7 +22,7 @@
                 {{#link-to 'config' class="w3-bar-item w3-button w3-hide-small w3-hover-white w3-text-white"}}Config{{/link-to}}
                 
                 <span class="wrapper">
-                    {{input value=queryString type="text" class="header-search" enter=(action "search")}}    
+                    {{input value=queryString type="text" class="header-search" enter=(action "search" queryString)}}    
                     <span class="fa fa-search searchicon"></span>
                 </span>
             </div>

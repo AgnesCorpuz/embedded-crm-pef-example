@@ -8,6 +8,7 @@
             <th>Account</th>
             <th>Phone</th>
             <th>Email</th>
+            <th>Priority</th>
         </thead>
         <tbody>                
             {{#each contactList as |contact|}}
@@ -23,6 +24,7 @@
                         {{phone-number phoneNumber=contact.Phone}} 
                     </td>
                     <td>{{contact.Email}}</td>
+                    <td>{{contact.Priority}}</td>
                 </tr>                        
             {{/each}}
         </tbody>

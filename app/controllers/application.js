@@ -18,12 +18,18 @@ export default Controller.extend({
                 data: { id: this.get('selectedStatus') }
             }), "*");
         },
-        search(){
-            this.transitionToRoute('search', {
-                queryParams: {
-                    query: this.queryString
-                }   
-            });
+        search(queryString){
+            let results = this.contactsService.searchContact(queryString);
+            if(results.length == 1){
+                console.log("JUST 1!");
+                this.transitionToRoute('contacts.contact', results[0].id);
+            }else{
+                this.transitionToRoute('search', {
+                    queryParams: {
+                        query: this.queryString
+                    }   
+                });
+            }
         }
     },
 
