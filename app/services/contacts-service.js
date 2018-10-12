@@ -4,11 +4,13 @@ import Service from '@ember/service';
 export default Service.extend({
     processCallLog: null,
     logs: null,
+    chatLogs: null,
     contactsService: null,
     init(){
         this._super(...arguments);
         this.set('processCallLog', []);
         this.set('logs', []);
+        this.set('chatLogs', []);
 
         this.contacts = [
             {

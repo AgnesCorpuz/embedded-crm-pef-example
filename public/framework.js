@@ -122,6 +122,17 @@ window.Framework = {
                     window.PureCloud.addCustomAttributes(message.data);
                 } else if(message.type == "updateUserStatus"){
                     window.PureCloud.User.updateStatus(message.data);
+                } else if(message.type == "getTranscript"){
+                    window.PureCloud.Interaction.Chat.getTranscript(
+                        message.data.interactionId, 
+                        (data) => {
+                            window.parent.postMessage(JSON.stringify({
+                                type:"chatTranscript", 
+                                data:data,
+                                interactionId: message.data.interactionId,
+                            }), this.crmDomain);
+                        }
+                    );  
                 }
             }
         });
