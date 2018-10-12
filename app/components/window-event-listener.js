@@ -1,5 +1,8 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
+import EmberObject from '@ember/object';
+
+const Log = EmberObject.extend({});
 
 export default Component.extend({
     frameworkService: service('framework-config'),
@@ -16,23 +19,26 @@ export default Component.extend({
             var message = JSON.parse(event.data);
             
             if(message){
+                // Screenpop Configuration
                 if(message.type == "screenPop"){
                     console.log('====================================');
                     console.log(message);
 
                     let attributes = message.data.interactionId.attributes;
 
+                    if(this.frameworkService.enablePEFUrlPop && attributes){
+                        if(attributes.pef_urlpop){
+                            let urlpop = decodeURIComponent(attributes.pef_urlpop);
 
-                    if(this.frameworkService.enablePEFUrlPop){
-                        let urlpop = decodeURIComponent(attributes.pef_urlpop);
-
-                        console.log('================================');
-                        console.log('PEF SEARCHURLPOP VALUE DETECTED ' + urlpop);
-                       
-                        this.get('router').transitionTo(urlpop);
-
-                    }else if(this.frameworkService.enablePEFSearchValue){
-                        let searchVal = attributes.pef_searchvalue;
+                            console.log('================================');
+                            console.log('PEF SEARCHURLPOP VALUE DETECTED ' + urlpop);
+                        
+                            this.get('router').transitionTo(urlpop);
+                        }
+                    }else if(this.frameworkService.enablePEFSearchValue && attributes){
+                        let searchVal = attributes.pef_searchvalue ? 
+                                            attributes.pef_searchvalue : 
+                                            "";
 
                         // Check if E.164 ANI is used for searching and strip the 'tel:'
                         if(searchVal.substring(0,4).toLowerCase().localeCompare("tel:") === 0){
@@ -59,6 +65,60 @@ export default Component.extend({
                         // TODO: Default behavior for screen pop
                     }
                 } 
+
+                // Logs for Chat Interactions
+                else if ((message.type == "processCallLog") &&
+                        (message.data.interactionId.isChat)) {
+                    console.log("IT's a chat!!!!!!!!!!!!!!!!!!!!");
+
+                    let data = message.data;
+                    let interaction = data.interactionId;
+                    
+                    // Get entry from chatLogs in Contacts Service
+                    // If does not exist, create one and store reference
+                    let entryRef = null;
+                    let existing = this.contactsService.chatLogs.filter((log) => 
+                        log.id.localeCompare(interaction.id) == 0
+                    );
+                    if(existing.length > 0){
+                        entryRef = existing[0];
+                    } else {
+                        entryRef = Log.create();
+                        this.contactsService.chatLogs.pushObject(entryRef);
+                    } 
+
+                    // Assign values to properties
+                    entryRef.set('id', interaction.id);
+                    entryRef.set('name', interaction.name);
+                    entryRef.set('notes', (() => {
+                            if(data.callLog.notes){
+                                return data.callLog.notes;
+                            }else{
+                                if(!entryRef.get('notes')) return "";
+                                else return entryRef.get('notes');
+                            }
+                    })()); 
+                    entryRef.set('priority', (() => {
+                        if(data.callLog.attributes && data.callLog.attributes.pef_priority){
+                            return data.callLog.attributes.pef_priority;
+                        }else{
+                            if(!entryRef.get('priority')) return "-";
+                            else return entryRef.get('priority');
+                        }
+                    })());
+                    entryRef.set('assosciation', (() => {
+                        if(data.callLog.selectedContact){
+                            return data.callLog.selectedContact.text;
+                        }else{
+                            if(!entryRef.get('assosciation')) return "-";
+                            else return entryRef.get('assosciation');
+                        }
+                    })());
+
+                    console.log('======================');
+                    console.log(entryRef);
+                    console.log(this.contactsService.chatLogs);
+                }
             }
         });
     }

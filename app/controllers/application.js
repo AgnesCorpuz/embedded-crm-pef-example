@@ -82,7 +82,7 @@ export default Controller.extend({
                     if(message.data.category == "status") {
                         toastr.info("User Status: " + message.data.data.status);
                     }
-                }  else if(message.type == "processCallLog"){
+                }  else if((message.type == "processCallLog") && !message.data.interactionId.isChat){
                     this.contactsService.processCallLog.pushObject(message);
 
                     var arrayBuilder = {};
