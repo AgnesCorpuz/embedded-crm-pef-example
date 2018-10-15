@@ -106,12 +106,12 @@ export default Component.extend({
                             else return entryRef.get('priority');
                         }
                     })());
-                    entryRef.set('assosciation', (() => {
+                    entryRef.set('association', (() => {
                         if(data.callLog.selectedContact){
                             return data.callLog.selectedContact.text;
                         }else{
-                            if(!entryRef.get('assosciation')) return "-";
-                            else return entryRef.get('assosciation');
+                            if(!entryRef.get('association')) return "-";
+                            else return entryRef.get('association');
                         }
                     })());
 
