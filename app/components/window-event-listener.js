@@ -134,6 +134,17 @@ export default Component.extend({
                     )[0];
 
                     entryRef.set('transcript', JSON.stringify(message.data));
+                
+                
+                } else if(message.type === "interactionSubscription"){
+                    console.log("INTERACTION");
+                    console.log(message.data);
+                
+
+                
+                } else if(message.type === "notificationSubscription"){
+                    console.log("NOTIFICATION");
+                    console.log(message.data);
                 }
             }
         });

@@ -85,25 +85,45 @@ window.Framework = {
     },
 
     crmDomain: null,
-    initialSetup: function () {
+    initialSetup: () => {
         console.log("=================  PURECLOUD EMBEDDABLE SETUP ============");
-        crmDomain = new URLSearchParams(window.location.search).get('crm_domain');
-        console.log("crm_domain : ", decodeURI(crmDomain));
-        if (!crmDomain) {
-        console.warn("========== crm_domain parameter is null =================");
+        this.crmDomain = new URLSearchParams(window.location.search).get('crm_domain');
+        console.log("crm_domain : ", decodeURI(this.crmDomain));
+        if (!this.crmDomain) {
+            console.warn("========== crm_domain parameter is null =================");
             return;
         }
 
         window.PureCloud.subscribe([
             {
                 type: 'UserAction', 
-                callback: function (category, data) {
+                callback: (category, data) => {
                     window.parent.postMessage(JSON.stringify({type:"userActionSubscription", data:{category:category, data:data}}), this.crmDomain);
                 }  
+            },
+            {
+                type: 'Interaction', 
+                callback: (category, data) => {
+                    window.parent.postMessage(
+                        JSON.stringify({
+                            type:"interactionSubscription", 
+                            data: { category: category, data: data }
+                        }), this.crmDomain);
+                }
+            },
+            {
+                type: 'Notification', 
+                callback: (category, data) => {
+                    window.parent.postMessage(
+                        JSON.stringify({
+                            type:"notificationSubscription", 
+                            data: { category: category, data: data }
+                        }), this.crmDomain);
+                }
             }
         ]);
 
-        window.addEventListener("message", function(event) {
+        window.addEventListener("message", (event) => {
             var message = JSON.parse(event.data);
             if(message){
                 if(message.type == "clickToDial"){
