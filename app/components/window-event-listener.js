@@ -9,13 +9,9 @@ export default Component.extend({
     contactsService: service('contacts-service'),
     router: service('router'),
 
-    // TODO: Consolidate assignment of event listener to this Controller
     didInsertElement(){
         
         window.addEventListener("message", (event) => {
-            // console.log('====================================');
-            // console.log(this);
-            // console.log(this.frameworkService);
             var message = JSON.parse(event.data);
             
             if(message){
@@ -23,6 +19,8 @@ export default Component.extend({
                 if(message.type == "screenPop"){
                     console.log('====================================');
                     console.log(message);
+
+                    this.contactsService.interactionId = message.data.interactionId.id;
 
                     let attributes = message.data.interactionId.attributes;
 
@@ -134,6 +132,110 @@ export default Component.extend({
                     )[0];
 
                     entryRef.set('transcript', JSON.stringify(message.data));
+
+                // Event handler for contact search
+                }  else if(message.type == "contactSearch") {
+
+                    // Add external contact
+                    document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
+                        type: 'sendContactSearch',
+                        data: [{"type": "external", "name": "Weather Line", "phone":[{ "number":"(317) 222-2222", "label":"Cell"}]}]
+                    }), "*");
+
+                    // Add transfer context
+                    document.getElementById("softphone").contentWindow.postMessage(JSON.stringify({
+                        type: 'addTransferContext',
+                        data: {"name": "Case: 1234 - Broken Phone","attributes": {"PEF_TransferContext": "Sample Transfer Context 1234"}}
+                    }), "*");
+
+                // Event handler for messages from user action subscription
+                } else if(message.type == "userActionSubscription"){
+                    if(message.data.category == "status") {
+                        toastr.info("User Status: " + message.data.data.status);
+                    }
+
+                // Event handler for process call logs
+                }  else if((message.type == "processCallLog") && !message.data.interactionId.isChat){
+
+                    // Push message into procesCallLog object property
+                    this.contactsService.processCallLog.pushObject(message);
+
+                    // Create new array to contain only specific properties needed from processCallLog
+                    var arrayBuilder = {};
+                    var logs = this.get('contactsService.callLogs');
+
+                    arrayBuilder.interactionId = message.data.interactionId.id;
+                    arrayBuilder.ani = message.data.interactionId.ani;
+
+                    if(message.data.callLog.hasOwnProperty('notes')) {
+                        arrayBuilder.notes = message.data.callLog.notes;
+                    } else {
+                        arrayBuilder.notes = "";
+                    }
+
+                    if(message.data.callLog.hasOwnProperty('attributes')) {
+                        if(message.data.callLog.attributes.hasOwnProperty('pef_priority')) { 
+                            arrayBuilder.attr = message.data.callLog.attributes.pef_priority;
+                        }  else {
+                            arrayBuilder.attr = "";
+                        }
+                    } else {
+                        arrayBuilder.attr = "";
+                    }
+
+                    if(message.data.callLog.hasOwnProperty('selectedContact')) {
+                        arrayBuilder.assoc = message.data.callLog.selectedContact.text;
+                    } else {
+                        arrayBuilder.assoc = "";
+                    }
+                    
+                    this.contactsService.callLogs.pushObject(arrayBuilder);
+
+                    // Make sure the array builder is pushed in logs array
+                    if(logs.length > 0) {
+                        for (var i = 0, len = logs.length; i < len; i++) {
+
+                            // Update array if interaction ID already exists
+                            if(logs[i].interactionId == this.contactsService.interactionId) {
+                                if(logs[i].notes == "") {
+                                    if(message.data.callLog.hasOwnProperty('notes')) {
+                                        arrayBuilder.notes = message.data.callLog.notes;
+                                    } else {
+                                        arrayBuilder.notes = "";
+                                    }
+                                } else {
+                                    arrayBuilder.notes = logs[i].notes;
+                                }
+
+                                if(logs[i].attr == "") { 
+                                    if(message.data.callLog.hasOwnProperty('attributes')) {
+                                        if(message.data.callLog.attributes.hasOwnProperty('pef_priority')) {
+                                            arrayBuilder.attr = message.data.callLog.attributes.pef_priority;
+                                        } else {
+                                            arrayBuilder.attr = "";
+                                        }
+                                    } else {
+                                        arrayBuilder.attr = "";
+                                    }
+                                } else {
+                                    arrayBuilder.attr = logs[i].attr;
+                                }
+
+                                if(logs[i].assoc == "") {
+                                    if(message.data.callLog.hasOwnProperty('selectedContact')) {
+                                        arrayBuilder.assoc = message.data.callLog.selectedContact.text;
+                                    } else {
+                                        arrayBuilder.assoc = "";
+                                    }
+                                } else {
+                                    arrayBuilder.assoc = logs[i].assoc;
+                                }
+
+                                this.contactsService.callLogs.removeObject(logs.objectAt(i));
+                                this.contactsService.callLogs.pushObject(arrayBuilder);
+                            }
+                        }
+                    }
                 }
             }
         });

@@ -3,13 +3,13 @@ import Service from '@ember/service';
 // TODO: Move contacts into initializer or stubbing library. 
 export default Service.extend({
     processCallLog: null,
-    logs: null,
+    callLogs: null,
     chatLogs: null,
     contactsService: null,
     init(){
         this._super(...arguments);
         this.set('processCallLog', []);
-        this.set('logs', []);
+        this.set('callLogs', []);
         this.set('chatLogs', []);
 
         this.contacts = [

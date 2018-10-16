@@ -115,10 +115,8 @@ window.Framework = {
                         contactSearchCallback(message.data);
                     }
                 } else if(message.type == "addAssociation"){
-                    console.log("PEF: ADD ASSOCIATION || " + event.data);
                     window.PureCloud.addAssociation(message.data);
                 } else if(message.type == "addAttribute"){
-                    console.log("PEF: ADD ATTRIBUTE || " + event.data);
                     window.PureCloud.addCustomAttributes(message.data);
                 } else if(message.type == "updateUserStatus"){
                     window.PureCloud.User.updateStatus(message.data);
@@ -142,7 +140,6 @@ window.Framework = {
     },
     processCallLog: (callLog, interaction, eventName, onSuccess, onFailure) => {
         window.parent.postMessage(JSON.stringify({type:"processCallLog" , data:{callLog:callLog, interactionId:interaction, eventName:eventName}}) , this.crmDomain);
-        console.log("PEF: PROCSS CALL LOG || " + JSON.stringify({type:"processCallLog" , data:{callLog:callLog, interactionId:interaction, eventName:eventName}}));
         var success = true;
         if (success) {
             onSuccess({

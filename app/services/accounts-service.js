@@ -9,7 +9,7 @@ export default Service.extend({
                 "Name": "Genesys",
                 "Office": "Daly City",
                 "Address": "2001 Junipero Serra Blvd Daly City, CA 94014",
-                "Phone": "+1.650.466.1100"
+                "Phone": "+1 650-466-1100"
             },
             {
                 "Name": "Google",

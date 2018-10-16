@@ -3,9 +3,9 @@ import { inject as service } from '@ember/service';
 
 export default Component.extend({
     contactService: service('contacts-service'),
-    callLogs: null,
+    
     init(){
         this._super(...arguments);
-        this.callLogs = this.contactService.logs;
+        this.set('callLogs', this.contactService.callLogs);
     }
 });
