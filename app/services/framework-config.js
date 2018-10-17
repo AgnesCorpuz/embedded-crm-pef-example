@@ -8,12 +8,16 @@ export default Service.extend({
         this.set('embedWebRTCByDefault', true);
         this.set('enableCallLogs', true);
         this.set('dedicatedLoginWindow', true);
-        this.set('userLanguage', "en-US");
+        this.set('userLanguage', {
+            'lang': "en-US",
+            'display': 'American English'
+        });
         this.set('enablePEFUrlPop', true);
         this.set('enablePEFSearchValue', true);
         this.set('theme', {
             'primary': '#666', 
-            'text': '#fff'
+            'text': '#fff',
+            'display': 'Default Grey'
         });
 
         // Custom Attributes 
@@ -37,10 +41,22 @@ export default Service.extend({
             this.set('dedicatedLoginWindow',(localStorage.getItem("dedicatedLoginWindow") === 'true'));
 
         if(localStorage.getItem("userLanguage") !== null)
-            this.set('userLanguage', localStorage.getItem("userLanguage"));
+            try {
+                this.set('userLanguage', JSON.parse(localStorage.getItem("userLanguage")));
+            } catch (error) {
+                localStorage.removeItem("userLanguage");
+            } 
 
         if(localStorage.getItem("theme") !== null) 
-            this.set('theme', JSON.parse(localStorage.getItem("theme")));
+            try {
+                let theme = JSON.parse(localStorage.getItem("theme"))
+                if(!(theme.display && theme.primary && theme.text))
+                    throw("Theme incorrect schema");
+                this.set('theme', theme);   
+                         
+            } catch (error) {
+                localStorage.removeItem("theme");
+            } 
 
         if(localStorage.getItem("enablePEFUrlPop") !== null) 
             this.set('enablePEFUrlPop', JSON.parse(localStorage.getItem("enablePEFUrlPop")));
@@ -53,7 +69,7 @@ export default Service.extend({
         localStorage.setItem('embedWebRTCByDefault', this.embedWebRTCByDefault);
         localStorage.setItem('enableCallLogs', this.enableCallLogs);
         localStorage.setItem('dedicatedLoginWindow', this.dedicatedLoginWindow);
-        localStorage.setItem('userLanguage', this.userLanguage);
+        localStorage.setItem('userLanguage', JSON.stringify(this.userLanguage));
         localStorage.setItem('theme', JSON.stringify(this.theme));
         localStorage.setItem('enablePEFUrlPop', JSON.stringify(this.enablePEFUrlPop));
         localStorage.setItem('enablePEFSearchValue', JSON.stringify(this.enablePEFSearchValue));

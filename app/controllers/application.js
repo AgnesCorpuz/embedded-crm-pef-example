@@ -51,7 +51,7 @@ export default Controller.extend({
         `&dedicatedLoginWindow=${this.frameworkConfig.dedicatedLoginWindow}` +
 
         // Softphone language
-        `&userLanguage=${this.frameworkConfig.userLanguage}` +
+        `&userLanguage=${this.frameworkConfig.userLanguage.lang}` +
 
         // Custom Attributes
         `&customAttributes=${this.frameworkConfig.customAttributes.join(",")}` + 
