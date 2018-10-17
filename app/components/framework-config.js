@@ -125,13 +125,19 @@ export default Component.extend({
             window.location.reload(true);
         },
         setLanguage: function(lang){
-            this.set('frameworkConfig.userLanguage', lang);
+            let displayName = this.languages.filter((l) =>
+                l.code.localeCompare(lang) == 0
+            )[0].language;
+
+            this.set('frameworkConfig.userLanguage.lang', lang);
+            this.set('frameworkConfig.userLanguage.display', displayName);
         },
         setTheme: function(themeName){
             let themeInfo = this.themes.filter((t) => t.name === themeName)[0];
 
             this.set('frameworkConfig.theme.primary', themeInfo.primary);
             this.set('frameworkConfig.theme.text', themeInfo.text);
+            this.set('frameworkConfig.theme.display', themeName);
         }
     }
 });

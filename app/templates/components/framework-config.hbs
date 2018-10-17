@@ -24,7 +24,7 @@
         <div style="margin: 10px">
             <label style="padding-right: 110px">Language: </label>
             <select onchange={{action 'setLanguage' value='target.value'}} name="userLanguage" id="userLanguage">
-                <option hidden value="">- choose new language -</option>
+                <option hidden value="">{{frameworkConfig.userLanguage.display}}</option>
                 {{#each languages as |language|}}
                     <option value={{language.code}}>{{language.language}}</option>
                 {{/each}}
@@ -33,7 +33,7 @@
         <div style="margin: 10px">
             <label style="padding-right: 132px">Theme: </label>
             <select onchange={{action 'setTheme' value='target.value'}} name="theme" id="theme">
-                <option hidden value="">- choose new theme -</option>
+                <option hidden value="">{{frameworkConfig.theme.display}}</option>
                 {{#each themes as |theme|}}
                     <option value={{theme.name}}>{{theme.name}}</option>
                 {{/each}}
