@@ -41,10 +41,22 @@ export default Service.extend({
             this.set('dedicatedLoginWindow',(localStorage.getItem("dedicatedLoginWindow") === 'true'));
 
         if(localStorage.getItem("userLanguage") !== null)
-            this.set('userLanguage', JSON.parse(localStorage.getItem("userLanguage")));
+            try {
+                this.set('userLanguage', JSON.parse(localStorage.getItem("userLanguage")));
+            } catch (error) {
+                localStorage.removeItem("userLanguage");
+            } 
 
         if(localStorage.getItem("theme") !== null) 
-            this.set('theme', JSON.parse(localStorage.getItem("theme")));
+            try {
+                let theme = JSON.parse(localStorage.getItem("theme"))
+                if(!(theme.display && theme.primary && theme.text))
+                    throw("Theme incorrect schema");
+                this.set('theme', theme);   
+                         
+            } catch (error) {
+                localStorage.removeItem("theme");
+            } 
 
         if(localStorage.getItem("enablePEFUrlPop") !== null) 
             this.set('enablePEFUrlPop', JSON.parse(localStorage.getItem("enablePEFUrlPop")));
