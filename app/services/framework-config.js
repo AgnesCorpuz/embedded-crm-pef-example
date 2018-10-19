@@ -8,7 +8,7 @@ export default Service.extend({
         this.set('embedWebRTCByDefault', true);
         this.set('enableCallLogs', true);
         this.set('dedicatedLoginWindow', true);
-        
+
         // Language
         this.set('userLanguage', {
             'lang': "en-US",
