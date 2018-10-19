@@ -105,7 +105,7 @@ export default Component.extend({
                 "text":  "#EAF2EF"
             },
             {
-                "name": "Willie Dap",
+                "name": "Dooby Dap",
                 "primary": "#333",
                 "text": "#FF9F6F"
             },
@@ -114,6 +114,14 @@ export default Component.extend({
                 "primary": "#FFFF93",
                 "text": "#000"
             }
+        ];
+    
+        this.regions = [
+            'mypurecloud.com',
+            'mypurecloud.com.au',
+            'mypurecloud.ie',
+            'mypurecloud.jp',
+            'mypurecloud.de'
         ];
     },
 
@@ -138,6 +146,9 @@ export default Component.extend({
             this.set('frameworkConfig.theme.primary', themeInfo.primary);
             this.set('frameworkConfig.theme.text', themeInfo.text);
             this.set('frameworkConfig.theme.display', themeName);
+        },
+        setRegion: function(region){
+            this.set('frameworkConfig.pureCloudRegion', region);
         }
     }
 });

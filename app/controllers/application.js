@@ -41,7 +41,7 @@ export default Controller.extend({
 
         // Dynamically build the URL for the Embedded Softphone
         this.frameWorkURL = 
-        `https://apps.mypurecloud.com/crm/index.html?` +
+        `https://apps.${this.frameworkConfig.pureCloudRegion}/crm/index.html?` +
         `crm=framework-local-secure` +
         `&crm_domain=${encodeURIComponent('https://localhost')}` +
 
