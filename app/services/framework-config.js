@@ -1,4 +1,5 @@
 import Service from '@ember/service';
+import ENV from 'pef/config/environment';
 
 export default Service.extend({
     init(){
@@ -27,7 +28,8 @@ export default Service.extend({
         });
 
         // PureCloud Region
-        this.set('pureCloudRegion', 'mypurecloud.com');
+        console.log(ENV);
+        this.set('pureCloudRegion', ENV.PureCloud.region);
 
         // Custom Attributes 
         // This is not saved in localStorage as this should be constant anyway
