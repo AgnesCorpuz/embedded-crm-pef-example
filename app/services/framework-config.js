@@ -19,6 +19,8 @@ export default Service.extend({
         // Custom Attributes
         this.set('enablePEFUrlPop', true);
         this.set('enablePEFSearchValue', true);
+        this.set('URLPopAttribute', 'pef_urlpop');
+        this.set('SearchValueAttribute', 'pef_searchvalue');
 
         // Color theme of the softphone
         this.set('theme', {

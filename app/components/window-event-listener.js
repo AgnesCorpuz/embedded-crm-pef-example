@@ -23,8 +23,13 @@ export default Component.extend({
                     this.contactsService.interactionId = message.data.interactionId.id;
 
                     let attributes = message.data.interactionId.attributes;
+                    let _urlpop, _searchvalue;
+                    if (attributes){                     
+                        _urlpop = attributes[this.frameworkService.URLPopAttribute];
+                        _searchvalue = attributes[this.frameworkService.SearchValueAttribute];
+                    }
 
-                    if(this.frameworkService.enablePEFUrlPop && attributes){
+                    if(this.frameworkService.enablePEFUrlPop && _urlpop){
                         if(attributes.pef_urlpop){
                             let urlpop = decodeURIComponent(attributes.pef_urlpop);
 
@@ -33,7 +38,7 @@ export default Component.extend({
                         
                             this.get('router').transitionTo(urlpop);
                         }
-                    }else if(this.frameworkService.enablePEFSearchValue && attributes){
+                    }else if(this.frameworkService.enablePEFSearchValue && _searchvalue){
                         let searchVal = attributes.pef_searchvalue ? 
                                             attributes.pef_searchvalue : 
                                             "";
