@@ -34,8 +34,21 @@ export default Component.extend({
                             let urlpop = decodeURIComponent(attributes.pef_urlpop);
 
                             console.log('================================');
-                            console.log('PEF SEARCHURLPOP VALUE DETECTED ' + urlpop);
-                        
+                            console.log('PEF URLPOP VALUE DETECTED ' + urlpop);
+                            
+                            // Child route cases
+                            let urlNest = urlpop.split("/");
+                            if (urlNest.length > 1){
+                                switch(urlNest[0].toLocaleLowerCase()){
+                                    case "contacts":
+                                        this.get('router').transitionTo(urlNest[0] + ".contact", urlNest[1]);
+                                        break;
+                                    case "transcript":
+                                        this.get('router').transitionTo(urlNest[0] + ".id",  urlNest[1]);
+                                        break;
+                                }
+                            }
+
                             this.get('router').transitionTo(urlpop);
                         }
                     }else if(this.frameworkService.enablePEFSearchValue && _searchvalue){
