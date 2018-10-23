@@ -32,6 +32,7 @@ window.Framework = {
             })(),
 
             enableTransferContext: true,
+            hideCallLogRelation: true,
             searchTargets: ['people', 'queues', 'frameworkcontacts'],
 
             // UI theme of the embedded softphone
@@ -55,7 +56,7 @@ window.Framework = {
                 interactionDetails: {
                     call: [
                         "participant.PEF_Priority",
-                        "call.Ani",
+                        "framework.DisplayAddress",
                         "call.ConversationId"
                     ]
                 }
