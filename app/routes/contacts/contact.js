@@ -7,6 +7,10 @@ export default Route.extend({
     model(params){
         console.log('=============================');
         console.log(params);
-        return this.contactsService.getContact(params.contact_id);
+        try{
+            return this.contactsService.getContact(params.contact_id);
+        }catch(err){
+            this.transitionTo("contacts");
+        }
     }
 });

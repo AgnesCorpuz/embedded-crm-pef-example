@@ -1,4 +1,5 @@
 import Service from '@ember/service';
+import ENV from 'pef/config/environment';
 
 export default Service.extend({
     init(){
@@ -8,17 +9,29 @@ export default Service.extend({
         this.set('embedWebRTCByDefault', true);
         this.set('enableCallLogs', true);
         this.set('dedicatedLoginWindow', true);
+
+        // Language
         this.set('userLanguage', {
             'lang': "en-US",
             'display': 'American English'
         });
+
+        // Custom Attributes
         this.set('enablePEFUrlPop', true);
         this.set('enablePEFSearchValue', true);
+        this.set('URLPopAttribute', 'pef_urlpop');
+        this.set('SearchValueAttribute', 'pef_searchvalue');
+
+        // Color theme of the softphone
         this.set('theme', {
             'primary': '#666', 
             'text': '#fff',
             'display': 'Default Grey'
         });
+
+        // PureCloud Region
+        console.log(ENV);
+        this.set('pureCloudRegion', ENV.PureCloud.region);
 
         // Custom Attributes 
         // This is not saved in localStorage as this should be constant anyway
@@ -63,6 +76,9 @@ export default Service.extend({
 
         if(localStorage.getItem("enablePEFSearchValue") !== null) 
             this.set('enablePEFSearchValue', JSON.parse(localStorage.getItem("enablePEFSearchValue")));
+        
+        if(localStorage.getItem("pureCloudRegion") !== null) 
+            this.set('pureCloudRegion', localStorage.getItem("pureCloudRegion"));
     },
 
     saveConfiguration(){
@@ -73,5 +89,6 @@ export default Service.extend({
         localStorage.setItem('theme', JSON.stringify(this.theme));
         localStorage.setItem('enablePEFUrlPop', JSON.stringify(this.enablePEFUrlPop));
         localStorage.setItem('enablePEFSearchValue', JSON.stringify(this.enablePEFSearchValue));
+        localStorage.setItem('pureCloudRegion', this.pureCloudRegion);
     }
 });

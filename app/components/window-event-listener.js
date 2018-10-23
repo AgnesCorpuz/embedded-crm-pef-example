@@ -23,17 +23,35 @@ export default Component.extend({
                     this.contactsService.interactionId = message.data.interactionId.id;
 
                     let attributes = message.data.interactionId.attributes;
+                    let _urlpop, _searchvalue;
+                    if (attributes){                     
+                        _urlpop = attributes[this.frameworkService.URLPopAttribute];
+                        _searchvalue = attributes[this.frameworkService.SearchValueAttribute];
+                    }
 
-                    if(this.frameworkService.enablePEFUrlPop && attributes){
+                    if(this.frameworkService.enablePEFUrlPop && _urlpop){
                         if(attributes.pef_urlpop){
                             let urlpop = decodeURIComponent(attributes.pef_urlpop);
 
                             console.log('================================');
-                            console.log('PEF SEARCHURLPOP VALUE DETECTED ' + urlpop);
-                        
+                            console.log('PEF URLPOP VALUE DETECTED ' + urlpop);
+                            
+                            // Child route cases
+                            let urlNest = urlpop.split("/");
+                            if (urlNest.length > 1){
+                                switch(urlNest[0].toLocaleLowerCase()){
+                                    case "contacts":
+                                        this.get('router').transitionTo(urlNest[0] + ".contact", urlNest[1]);
+                                        break;
+                                    case "transcript":
+                                        this.get('router').transitionTo(urlNest[0] + ".id",  urlNest[1]);
+                                        break;
+                                }
+                            }
+
                             this.get('router').transitionTo(urlpop);
                         }
-                    }else if(this.frameworkService.enablePEFSearchValue && attributes){
+                    }else if(this.frameworkService.enablePEFSearchValue && _searchvalue){
                         let searchVal = attributes.pef_searchvalue ? 
                                             attributes.pef_searchvalue : 
                                             "";

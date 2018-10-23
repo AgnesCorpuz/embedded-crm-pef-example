@@ -55,6 +55,7 @@ export default Service.extend({
     getContact(contactId){
         let contact = this.contacts.filter((contact) => 
                             contact.id === contactId);
+        if(contact.length <= 0) throw Error("Contact does not exist");
         return contact[0];
     },
 

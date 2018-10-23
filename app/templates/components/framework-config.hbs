@@ -22,7 +22,17 @@
             {{input type='checkbox' checked=frameworkConfig.enablePEFUrlPop}}
         </div>
         <div style="margin: 10px">
-            <label style="padding-right: 110px">Language: </label>
+            <label style="padding-right: 70px">PureCloud Region: </label>
+            <select onchange={{action 'setRegion' value='target.value'}} name="pcRegion" id="pcRegion">
+                <option hidden value="">{{frameworkConfig.pureCloudRegion}}</option>
+                {{#each regions as |region|}}
+                    <option value={{region}}>{{region}}</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <div style="margin: 10px">
+            <label style="padding-right: 130px">Language: </label>
             <select onchange={{action 'setLanguage' value='target.value'}} name="userLanguage" id="userLanguage">
                 <option hidden value="">{{frameworkConfig.userLanguage.display}}</option>
                 {{#each languages as |language|}}
@@ -31,7 +41,7 @@
             </select>
         </div>
         <div style="margin: 10px">
-            <label style="padding-right: 132px">Theme: </label>
+            <label style="padding-right: 152px">Theme: </label>
             <select onchange={{action 'setTheme' value='target.value'}} name="theme" id="theme">
                 <option hidden value="">{{frameworkConfig.theme.display}}</option>
                 {{#each themes as |theme|}}

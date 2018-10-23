@@ -10,7 +10,9 @@ window.Framework = {
             embedWebRTCByDefault: (() => {
                 let embedWebRTCByDefault = new URLSearchParams(window.location.search).get('embedWebRTCByDefault');
 
-                if(!embedWebRTCByDefault) return true;
+                if(embedWebRTCByDefault == null) return true;
+
+                embedWebRTCByDefault = (embedWebRTCByDefault == 'true');
 
                 return embedWebRTCByDefault;
             })(),
@@ -18,15 +20,19 @@ window.Framework = {
             enableCallLogs: (() => {
                 let enableCallLogs = new URLSearchParams(window.location.search).get('enableCallLogs');
 
-                if(!enableCallLogs) return true;
+                if(enableCallLogs == null) return true;
+
+                enableCallLogs = (enableCallLogs == 'true');
 
                 return enableCallLogs;
             })(),
 
             dedicatedLoginWindow: (() => {
-                let dedicatedLoginWindow = new URLSearchParams(window.location.search).get('dedicatedLoginWindow');
+                let dedicatedLoginWindow = new URLSearchParams(window.location.search).get('dedicatedLoginWindow');                
 
-                if(!dedicatedLoginWindow) return true;
+                if(dedicatedLoginWindow == null) return true;
+
+                dedicatedLoginWindow = (dedicatedLoginWindow == 'true');
 
                 return dedicatedLoginWindow;
             })(),
